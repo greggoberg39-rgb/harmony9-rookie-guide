@@ -44,6 +44,11 @@ active = [l for l in lodges if l["status"] in ("active", "active_special", "comm
 HARMONY = "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI"
 def clean_loc(loc, title):
     if not loc: return ""
+    if loc.startswith("Unknown"): return "Not stated (see the link shared in the chat)"
+    if loc.startswith("Meet time"): return "Meeting point not stated"
+    if loc.startswith("See invite image"): return "See the flyer shared in the chat (Jun 29)"
+    if loc.startswith("The park"): return "The park (Masonic Youth Park, 116 Long St, Warwick, RI)"
+    if loc.startswith("See Rob's flyer"): return "See the flyer in the Photos section"
     if re.search(r"house|Carlton", loc, re.I): return "A brother's home (address not shown)"
     if re.search(r"Doric Masonic Center|Harmony Lodge #?9?,? 1237|Harmony Lodge No\. 9", loc): return HARMONY
     if "Carpenter-Jenks" in loc:
@@ -54,6 +59,7 @@ def clean_loc(loc, title):
     if m:
         k = norm(m.group(1))
         names = [l["lodge_name"] + " No. " + l["number"] for l in active if norm(l["street"]) == k]
+        if len(names) > 3: return loc.rstrip(".") + " (shared Masonic building)"
         if names: return loc.rstrip(".") + " (building of " + " / ".join(names) + ")"
     m = re.search(r"#(\d+)", loc) or re.search(r"No\. ?(\d+)", loc)
     if m and m.group(1) in by_no and "Harmony" not in loc:
@@ -77,6 +83,8 @@ TITLE_FIX = {  # keep surnames of private individuals off the page
  "Morning Star Lodge memorial for WB Norman Albert Skip Priestley": "Morning Star Lodge memorial for a late Worshipful Brother (date not yet set)"}
 def clean_title(t):
     t = re.sub(r"\s*\((?:TODAY|[^)]*Gregg[^)]*)\)", "", t).strip()
+    t = re.sub(r"\(Jeffrey Resch invitation\)", "(email invitation)", t).replace(" (Jeffrey Resch invitation)", "")
+    t = t.replace(", Jeffrey Resch invitation", ", email invitation")
     return TITLE_FIX.get(t, t)
 def scrub(t):
     t = re.sub(r"RSVP.*$", "", t)
