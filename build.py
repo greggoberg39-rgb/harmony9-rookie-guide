@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rebuild the Rookie Award Guide (v2.0) data + index.html from the local archive.
+"""Rebuild the Rookie Award Guide (v2.1) data + index.html from the local archive.
 
 Usage:  python3 build.py [/path/to/harmony-archive]
 Reads events.csv, ri_lodges.csv, links.csv, media.csv, image_ids.tsv, drive_ids.tsv, image_text.csv
@@ -15,13 +15,15 @@ import csv, json, re, sys, os, datetime, subprocess, hashlib, shutil
 ARCH = sys.argv[1] if len(sys.argv) > 1 else "/workspace/harmony-archive"
 HERE = os.path.dirname(os.path.abspath(__file__))
 TODAY = datetime.date.today().isoformat()
-VERSION = "2.0"
+VERSION = "2.1"
 FOLDER = "https://drive.google.com/drive/folders/1OwSPqYeJlTW7ZvceGOezPnjsX4wDboHd"
 IMAGES = "https://drive.google.com/drive/folders/19peixug8n3EthSHKtXh0Th1JSoQ_JEkT"
 VIDEOS = "https://drive.google.com/drive/folders/1uzXTYt5i8P-8o8M0AxtjK_5akMaAP0qE"
 # Set this to the public Google Form URL once Gregg creates the signup form.
 # The site section stays hidden until this is a non-empty URL.
 FORM_URL = ""
+# Set to False to hide the Blog nav link and skip generating blog pages (posts stay in blog/posts/).
+BLOG_ENABLED = True
 view = lambda i: f"https://drive.google.com/file/d/{i}/view"
 rd = lambda f: list(csv.DictReader(open(os.path.join(ARCH, f), encoding="utf-8")))
 tsv = lambda f: [l.rstrip("\n").split("\t") for l in open(os.path.join(ARCH, f), encoding="utf-8") if l.strip()]
@@ -271,6 +273,80 @@ def prepare_form_image():
     except Exception as ex:
         print("official form photo failed", ex)
         return ""
+
+
+def parse_post(text):
+    if not text.startswith("---"):
+        raise ValueError("post is missing front matter")
+    _lead, fm, body = text.split("---", 2)
+    meta = {}
+    for line in fm.strip().splitlines():
+        if ":" not in line:
+            continue
+        k, v = line.split(":", 1)
+        v = v.strip()
+        if len(v) >= 2 and v[0] == v[-1] == '"':
+            v = v[1:-1].replace('\\"', '"').replace("\\\\", "\\")
+        meta[k.strip()] = v
+    meta["body"] = body.strip()
+    return meta
+
+def fmt_long(d):
+    y, m, dd = map(int, d.split("-"))
+    return datetime.date(y, m, dd).strftime("%B ") + str(dd) + datetime.date(y, m, dd).strftime(", %Y")
+
+def html_esc(s):
+    return (s or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+
+def build_blog():
+    """Render blog/index.html and blog/<slug>.html from blog/posts/*.md. No-op if BLOG_ENABLED is False."""
+    blog_dir = os.path.join(HERE, "blog")
+    posts_dir = os.path.join(blog_dir, "posts")
+    if os.path.isdir(blog_dir):
+        for fn in os.listdir(blog_dir):
+            if fn.endswith(".html") and not fn.startswith("_"):
+                os.remove(os.path.join(blog_dir, fn))
+    if not BLOG_ENABLED or not os.path.isdir(posts_dir):
+        return []
+    posts = []
+    for fn in os.listdir(posts_dir):
+        if not fn.endswith(".md"):
+            continue
+        posts.append(parse_post(open(os.path.join(posts_dir, fn), encoding="utf-8").read()))
+    posts.sort(key=lambda p: (p.get("date") or "", p.get("title") or ""), reverse=True)
+    css = open(os.path.join(blog_dir, "_shared.css"), encoding="utf-8").read()
+    idx_tpl = open(os.path.join(blog_dir, "_index.html"), encoding="utf-8").read()
+    post_tpl = open(os.path.join(blog_dir, "_post.html"), encoding="utf-8").read()
+    cards = []
+    for p in posts:
+        slug = p.get("slug") or re.sub(r"[^a-z0-9]+", "-", (p.get("title") or "").lower()).strip("-")
+        p["slug"] = slug
+        cards.append(
+            f'<a class="card card-link" href="{html_esc(slug)}.html">'
+            f'<h3>{html_esc(p.get("title", ""))}</h3>'
+            f'<div class="meta"><span class="date">{html_esc(fmt_long(p["date"]))}</span> · {html_esc(p.get("author") or "Author")}</div>'
+            f'<p>{html_esc(p.get("excerpt", ""))}</p></a>'
+        )
+        note = (p.get("note") or "").strip()
+        note_html = (" " + html_esc(note)) if note else ""
+        page = (post_tpl
+            .replace("/*__CSS__*/", css)
+            .replace("/*__TITLE__*/", html_esc(p.get("title", "")))
+            .replace("/*__AUTHOR__*/", html_esc(p.get("author") or "Author"))
+            .replace("/*__DATE__*/", html_esc(fmt_long(p["date"])))
+            .replace("/*__SOURCE__*/", html_esc(p.get("source", "")))
+            .replace("/*__NOTE__*/", note_html)
+            .replace("/*__VERSION__*/", VERSION)
+            .replace("/*__BUILT__*/", TODAY)
+            .replace("<!--__BODY__-->", p["body"]))
+        open(os.path.join(blog_dir, slug + ".html"), "w", encoding="utf-8").write(page)
+    idx = (idx_tpl
+        .replace("/*__CSS__*/", css)
+        .replace("<!--__POSTS__-->", "\n".join(cards))
+        .replace("/*__VERSION__*/", VERSION)
+        .replace("/*__BUILT__*/", TODAY))
+    open(os.path.join(blog_dir, "index.html"), "w", encoding="utf-8").write(idx)
+    return posts
 
 # ---------- lodges ----------
 lodges = rd("ri_lodges.csv")
@@ -676,9 +752,10 @@ hosted_vids = sum(1 for v in videos if v.get("src"))
 checklist = dict(CHECKLIST)
 checklist["formImage"] = form_url_img
 checklist["formUrl"] = FORM_URL
+blog_posts = build_blog()
 
 data = {"built": TODAY, "version": VERSION, "folder": FOLDER, "imagesFolder": IMAGES, "videosFolder": VIDEOS,
-        "formUrl": FORM_URL,
+        "formUrl": FORM_URL, "blogEnabled": BLOG_ENABLED, "blogCount": len(blog_posts),
         "events": {"upcoming": up, "past": past, "other": other},
         "checklist": checklist,
         "flyers": flyers, "photos": photos, "videos": videos, "docs": docs,
@@ -689,7 +766,8 @@ data = {"built": TODAY, "version": VERSION, "folder": FOLDER, "imagesFolder": IM
                    "resources": len(resources) + len(reading), "lodges": len(lodge_dir),
                    "hostedImages": hosted_imgs, "hostedVideos": hosted_vids,
                    "hostedImageMB": round(img_bytes / 1048576, 2),
-                   "hostedVideoMB": round(vid_bytes / 1048576, 2)}}
+                   "hostedVideoMB": round(vid_bytes / 1048576, 2),
+                   "blog": len(blog_posts) if BLOG_ENABLED else 0}}
 os.makedirs(os.path.join(HERE, "data"), exist_ok=True)
 for k in ("events", "checklist", "flyers", "photos", "videos", "docs", "resources", "reading", "lodges", "counts"):
     json.dump(data[k], open(os.path.join(HERE, "data", k + ".json"), "w"), indent=1, ensure_ascii=False)
@@ -707,4 +785,6 @@ print(json.dumps({
     "leftOutVideos": left_out_videos,
     "formImage": form_url_img or None,
     "formUrlSet": bool(FORM_URL),
+    "blogEnabled": BLOG_ENABLED,
+    "blogPosts": [{"title": p.get("title"), "date": p.get("date"), "author": p.get("author"), "source": p.get("source")} for p in blog_posts],
 }, indent=2, ensure_ascii=False))
