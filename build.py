@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rebuild the Rookie Award Guide (v2.1.1) data + index.html from the local archive.
+"""Rebuild the Rookie Award Guide (v2.1.2) data + index.html from the local archive.
 
 Usage:  python3 build.py [/path/to/harmony-archive]
 Reads events.csv, ri_lodges.csv, links.csv, media.csv, image_ids.tsv, drive_ids.tsv, image_text.csv
@@ -15,7 +15,7 @@ import csv, json, re, sys, os, datetime, subprocess, hashlib, shutil
 ARCH = sys.argv[1] if len(sys.argv) > 1 else "/workspace/harmony-archive"
 HERE = os.path.dirname(os.path.abspath(__file__))
 TODAY = datetime.date.today().isoformat()
-VERSION = "2.1.1"
+VERSION = "2.1.2"
 FOLDER = "https://drive.google.com/drive/folders/1OwSPqYeJlTW7ZvceGOezPnjsX4wDboHd"
 IMAGES = "https://drive.google.com/drive/folders/19peixug8n3EthSHKtXh0Th1JSoQ_JEkT"
 VIDEOS = "https://drive.google.com/drive/folders/1uzXTYt5i8P-8o8M0AxtjK_5akMaAP0qE"
@@ -26,7 +26,7 @@ FORM_URL = ""
 #   "live"        - publish posts from blog/posts/*.md
 #   "coming_soon" - keep the Blog nav link, show a Coming soon page, do not publish post pages
 #   "off"         - hide the Blog nav link and skip generating blog pages
-BLOG_MODE = "coming_soon"
+BLOG_MODE = "live"
 BLOG_ENABLED = BLOG_MODE != "off"
 view = lambda i: f"https://drive.google.com/file/d/{i}/view"
 rd = lambda f: list(csv.DictReader(open(os.path.join(ARCH, f), encoding="utf-8")))
@@ -330,10 +330,20 @@ def build_blog():
         if not fn.endswith(".md"):
             continue
         posts.append(parse_post(open(os.path.join(posts_dir, fn), encoding="utf-8").read()))
+    def is_published(post):
+        v = str(post.get("published") or "true").strip().lower()
+        return v not in ("false", "no", "0", "off")
+    posts = [post for post in posts if is_published(post)]
     posts.sort(key=lambda p: (p.get("date") or "", p.get("title") or ""), reverse=True)
     css = open(os.path.join(blog_dir, "_shared.css"), encoding="utf-8").read()
     idx_tpl = open(os.path.join(blog_dir, "_index.html"), encoding="utf-8").read()
     post_tpl = open(os.path.join(blog_dir, "_post.html"), encoding="utf-8").read()
+    if any((post.get("source") or "").strip() for post in posts):
+        tagline = "Blog — posts by Ben Giumarra and Gregg Oberg, republished with permission."
+        intro = "These pieces were written by Ben Giumarra and Gregg Oberg and are republished here with permission. Each post names its author and links back to where it first appeared."
+    else:
+        tagline = "Harmony Lodge No. 9, Cranston, Rhode Island."
+        intro = "Notes from the work at Harmony Lodge No. 9."
     cards = []
     for p in posts:
         slug = p.get("slug") or re.sub(r"[^a-z0-9]+", "-", (p.get("title") or "").lower()).strip("-")
@@ -344,21 +354,38 @@ def build_blog():
             f'<div class="meta"><span class="date">{html_esc(fmt_long(p["date"]))}</span> · {html_esc(p.get("author") or "Author")}</div>'
             f'<p>{html_esc(p.get("excerpt", ""))}</p></a>'
         )
+        caveat = (p.get("caveat") or "").strip()
+        caveat_html = f'<div class="notice">{html_esc(caveat)}</div>' if caveat else ""
+        source = (p.get("source") or "").strip()
         note = (p.get("note") or "").strip()
-        note_html = (" " + html_esc(note)) if note else ""
+        if source:
+            credit_html = (
+                '<p class="credit">Originally published at '
+                f'<a href="{html_esc(source)}">{html_esc(source)}</a>. '
+                "Republished with the author's permission."
+                + ((" " + html_esc(note)) if note else "")
+                + "</p>"
+            )
+        elif note:
+            credit_html = f'<p class="credit">{html_esc(note)}</p>'
+        else:
+            credit_html = ""
         page = (post_tpl
             .replace("/*__CSS__*/", css)
             .replace("/*__TITLE__*/", html_esc(p.get("title", "")))
             .replace("/*__AUTHOR__*/", html_esc(p.get("author") or "Author"))
             .replace("/*__DATE__*/", html_esc(fmt_long(p["date"])))
-            .replace("/*__SOURCE__*/", html_esc(p.get("source", "")))
-            .replace("/*__NOTE__*/", note_html)
+            .replace("/*__TAGLINE__*/", tagline)
+            .replace("<!--__CAVEAT__-->", caveat_html)
+            .replace("<!--__CREDIT__-->", credit_html)
             .replace("/*__VERSION__*/", VERSION)
             .replace("/*__BUILT__*/", TODAY)
             .replace("<!--__BODY__-->", p["body"]))
         open(os.path.join(blog_dir, slug + ".html"), "w", encoding="utf-8").write(page)
     idx = (idx_tpl
         .replace("/*__CSS__*/", css)
+        .replace("/*__TAGLINE__*/", tagline)
+        .replace("<!--__INTRO__-->", intro)
         .replace("<!--__POSTS__-->", "\n".join(cards))
         .replace("/*__VERSION__*/", VERSION)
         .replace("/*__BUILT__*/", TODAY))

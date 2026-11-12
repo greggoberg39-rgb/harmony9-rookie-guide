@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Borrower Changes Demographic Data Answer"
 date: 2017-11-27
 author: Ben Giumarra

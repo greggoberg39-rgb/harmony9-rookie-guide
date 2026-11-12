@@ -1,4 +1,5 @@
 ---
+published: false
 title: "HMDA Analysis for More than Just Compliance…"
 date: 2017-11-02
 author: Ben Giumarra

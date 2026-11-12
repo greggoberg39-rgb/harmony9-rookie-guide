@@ -3,16 +3,20 @@
 A static, single-page guide (no server, no accounts) built from the local Harmony #9 archive.
 Hosted on GitHub Pages: https://greggoberg39-rgb.github.io/harmony9-rookie-guide/
 
-**Current version: v2.1.1**
+**Current version: v2.1.2**
 
-The page includes the official RI Grand Lodge Master Mason Rookie Award checklist (with a personal tracker saved only in the browser), a calendar in both list and month-grid views, flyers/photos/videos hosted on the site so they work on an iPhone without downloading from Google Drive, resources, an RI lodge directory, a Blog section (currently Coming soon), and a "suggest an improvement" email link.
+The page includes the official RI Grand Lodge Master Mason Rookie Award checklist (with a personal tracker saved only in the browser), a calendar in both list and month-grid views, flyers/photos/videos hosted on the site so they work on an iPhone without downloading from Google Drive, resources, an RI lodge directory, a Blog section (currently one post about this project), and a "suggest an improvement" email link.
 
 ## Changelog
 
+### v2.1.2 (2026-11-12)
+- Publishes one original post, “What One Volunteer and an AI Built in 22 Days” (byline Gregg Oberg & Grok), with a visible caveat that it was written by Grok at Gregg's request and that Gregg has not yet read or edited it. The three effort charts are hosted under `blog/media/`.
+- The 12 earlier posts remain in `blog/posts/` with `published: false`, so they stay in git and are not generated or linked. Old `/blog/<slug>.html` URLs for those posts do not serve content.
+- To restore the earlier posts: in each of the 12 older files in `blog/posts/`, set `published: true` (or delete the `published:` line), confirm `BLOG_MODE = "live"` in `build.py`, run `python3 build.py`, commit and push.
+- `BLOG_MODE` still works: `"live"` publishes posts marked published; `"coming_soon"` keeps the nav link and a Coming soon page; `"off"` hides the nav link and skips generating blog pages. Post sources are never deleted by the build.
+
 ### v2.1.1 (2026-11-12)
-- Blog content is pulled from the live site. The Blog nav link still goes to `/blog/`, which now shows a Coming soon placeholder. Generated post pages are not published, so old `/blog/<slug>.html` URLs no longer serve post content. Source files stay in `blog/posts/` (and `blog/media/`) so the posts can be restored later.
-- To restore the posts: set `BLOG_MODE = "live"` at the top of `build.py`, run `python3 build.py`, commit and push.
-- Other `BLOG_MODE` values: `"coming_soon"` (current) keeps the nav link and Coming soon page; `"off"` hides the nav link and skips generating blog pages. Post sources are never deleted by the build.
+- Blog content was pulled from the live site and replaced with a Coming soon placeholder. Source files stayed in `blog/posts/`. Superseded by v2.1.2, which publishes a single new post and keeps the earlier posts unpublished.
 
 ### v2.1 (2026-11-12)
 - Adds a Blog section (index cards plus individual post pages) with a nav link. Posts live in `blog/posts/*.md` and are rendered by `build.py`, so new posts are just another markdown file (title, author, date, excerpt, original URL, body). The index supports multiple authors.
@@ -38,7 +42,7 @@ The page includes the official RI Grand Lodge Master Mason Rookie Award checklis
 - `media/img/` - web-sized JPEGs and `thumbs/`.
 - `media/video/` - iPhone-friendly mp4s and `posters/`.
 - `source/` - optional drop folder for the official form photo (`rookie-award-form.jpg`).
-- `blog/posts/*.md` - blog posts (front matter + HTML body). `build.py` writes `blog/index.html` and `blog/<slug>.html` when `BLOG_MODE` is `"live"`. When `BLOG_MODE` is `"coming_soon"`, it writes only the Coming soon `blog/index.html`.
+- `blog/posts/*.md` - blog posts (front matter + HTML body). `build.py` writes `blog/index.html` and `blog/<slug>.html` for posts with `published` other than `false` when `BLOG_MODE` is `"live"`. When `BLOG_MODE` is `"coming_soon"`, it writes only the Coming soon `blog/index.html`.
 - `blog/_index.html`, `blog/_post.html`, `blog/_coming_soon.html`, `blog/_shared.css` - blog templates.
 - `blog/media/` - images used in blog posts.
 

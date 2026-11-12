@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Republicans Win CFPB Hearing: How It Affects You"
 date: 2017-12-01
 author: Ben Giumarra

@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Thanks to John + Any difference between Non-QM and higher-priced QM?"
 date: 2018-01-02
 author: Ben Giumarra

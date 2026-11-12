@@ -1,4 +1,5 @@
 ---
+published: false
 title: "How much of TRID will help with HMDA?"
 date: 2017-10-27
 author: Ben Giumarra
