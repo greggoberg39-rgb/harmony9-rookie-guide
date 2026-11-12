@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rebuild the Rookie Award Guide (v2.1) data + index.html from the local archive.
+"""Rebuild the Rookie Award Guide (v2.1.1) data + index.html from the local archive.
 
 Usage:  python3 build.py [/path/to/harmony-archive]
 Reads events.csv, ri_lodges.csv, links.csv, media.csv, image_ids.tsv, drive_ids.tsv, image_text.csv
@@ -15,15 +15,19 @@ import csv, json, re, sys, os, datetime, subprocess, hashlib, shutil
 ARCH = sys.argv[1] if len(sys.argv) > 1 else "/workspace/harmony-archive"
 HERE = os.path.dirname(os.path.abspath(__file__))
 TODAY = datetime.date.today().isoformat()
-VERSION = "2.1"
+VERSION = "2.1.1"
 FOLDER = "https://drive.google.com/drive/folders/1OwSPqYeJlTW7ZvceGOezPnjsX4wDboHd"
 IMAGES = "https://drive.google.com/drive/folders/19peixug8n3EthSHKtXh0Th1JSoQ_JEkT"
 VIDEOS = "https://drive.google.com/drive/folders/1uzXTYt5i8P-8o8M0AxtjK_5akMaAP0qE"
 # Set this to the public Google Form URL once Gregg creates the signup form.
 # The site section stays hidden until this is a non-empty URL.
 FORM_URL = ""
-# Set to False to hide the Blog nav link and skip generating blog pages (posts stay in blog/posts/).
-BLOG_ENABLED = True
+# Blog publishing mode. Source files in blog/posts/ are never deleted.
+#   "live"        - publish posts from blog/posts/*.md
+#   "coming_soon" - keep the Blog nav link, show a Coming soon page, do not publish post pages
+#   "off"         - hide the Blog nav link and skip generating blog pages
+BLOG_MODE = "coming_soon"
+BLOG_ENABLED = BLOG_MODE != "off"
 view = lambda i: f"https://drive.google.com/file/d/{i}/view"
 rd = lambda f: list(csv.DictReader(open(os.path.join(ARCH, f), encoding="utf-8")))
 tsv = lambda f: [l.rstrip("\n").split("\t") for l in open(os.path.join(ARCH, f), encoding="utf-8") if l.strip()]
@@ -299,14 +303,27 @@ def html_esc(s):
     return (s or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
 
 def build_blog():
-    """Render blog/index.html and blog/<slug>.html from blog/posts/*.md. No-op if BLOG_ENABLED is False."""
+    """Render blog pages according to BLOG_MODE. Source posts in blog/posts/ are never deleted."""
     blog_dir = os.path.join(HERE, "blog")
     posts_dir = os.path.join(blog_dir, "posts")
     if os.path.isdir(blog_dir):
         for fn in os.listdir(blog_dir):
             if fn.endswith(".html") and not fn.startswith("_"):
                 os.remove(os.path.join(blog_dir, fn))
-    if not BLOG_ENABLED or not os.path.isdir(posts_dir):
+    if BLOG_MODE == "off" or not os.path.isdir(blog_dir):
+        return []
+    css_path = os.path.join(blog_dir, "_shared.css")
+    css = open(css_path, encoding="utf-8").read() if os.path.isfile(css_path) else ""
+    if BLOG_MODE == "coming_soon":
+        tpl_path = os.path.join(blog_dir, "_coming_soon.html")
+        tpl = open(tpl_path, encoding="utf-8").read()
+        page = (tpl
+            .replace("/*__CSS__*/", css)
+            .replace("/*__VERSION__*/", VERSION)
+            .replace("/*__BUILT__*/", TODAY))
+        open(os.path.join(blog_dir, "index.html"), "w", encoding="utf-8").write(page)
+        return []
+    if not os.path.isdir(posts_dir):
         return []
     posts = []
     for fn in os.listdir(posts_dir):
@@ -755,7 +772,7 @@ checklist["formUrl"] = FORM_URL
 blog_posts = build_blog()
 
 data = {"built": TODAY, "version": VERSION, "folder": FOLDER, "imagesFolder": IMAGES, "videosFolder": VIDEOS,
-        "formUrl": FORM_URL, "blogEnabled": BLOG_ENABLED, "blogCount": len(blog_posts),
+        "formUrl": FORM_URL, "blogMode": BLOG_MODE, "blogEnabled": BLOG_ENABLED, "blogCount": len(blog_posts),
         "events": {"upcoming": up, "past": past, "other": other},
         "checklist": checklist,
         "flyers": flyers, "photos": photos, "videos": videos, "docs": docs,
@@ -785,6 +802,7 @@ print(json.dumps({
     "leftOutVideos": left_out_videos,
     "formImage": form_url_img or None,
     "formUrlSet": bool(FORM_URL),
+    "blogMode": BLOG_MODE,
     "blogEnabled": BLOG_ENABLED,
     "blogPosts": [{"title": p.get("title"), "date": p.get("date"), "author": p.get("author"), "source": p.get("source")} for p in blog_posts],
 }, indent=2, ensure_ascii=False))

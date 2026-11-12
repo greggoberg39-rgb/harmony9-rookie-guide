@@ -3,16 +3,21 @@
 A static, single-page guide (no server, no accounts) built from the local Harmony #9 archive.
 Hosted on GitHub Pages: https://greggoberg39-rgb.github.io/harmony9-rookie-guide/
 
-**Current version: v2.1**
+**Current version: v2.1.1**
 
-The page includes the official RI Grand Lodge Master Mason Rookie Award checklist (with a personal tracker saved only in the browser), a calendar in both list and month-grid views, flyers/photos/videos hosted on the site so they work on an iPhone without downloading from Google Drive, resources, an RI lodge directory, a blog of republished posts, and a "suggest an improvement" email link.
+The page includes the official RI Grand Lodge Master Mason Rookie Award checklist (with a personal tracker saved only in the browser), a calendar in both list and month-grid views, flyers/photos/videos hosted on the site so they work on an iPhone without downloading from Google Drive, resources, an RI lodge directory, a Blog section (currently Coming soon), and a "suggest an improvement" email link.
 
 ## Changelog
+
+### v2.1.1 (2026-11-12)
+- Blog content is pulled from the live site. The Blog nav link still goes to `/blog/`, which now shows a Coming soon placeholder. Generated post pages are not published, so old `/blog/<slug>.html` URLs no longer serve post content. Source files stay in `blog/posts/` (and `blog/media/`) so the posts can be restored later.
+- To restore the posts: set `BLOG_MODE = "live"` at the top of `build.py`, run `python3 build.py`, commit and push.
+- Other `BLOG_MODE` values: `"coming_soon"` (current) keeps the nav link and Coming soon page; `"off"` hides the nav link and skips generating blog pages. Post sources are never deleted by the build.
 
 ### v2.1 (2026-11-12)
 - Adds a Blog section (index cards plus individual post pages) with a nav link. Posts live in `blog/posts/*.md` and are rendered by `build.py`, so new posts are just another markdown file (title, author, date, excerpt, original URL, body). The index supports multiple authors.
 - Seeded with 12 pieces republished with permission: 11 RIMBA posts bylined or credited to Ben Giumarra, plus "Who Ya Gonna Call?" by Gregg Oberg. Each post shows its byline, the original date, an "Originally published at" link, and a permission note.
-- To pull the blog out quickly, either: (1) set `BLOG_ENABLED = False` at the top of `build.py`, run `python3 build.py`, commit and push (nav link and generated pages disappear; `blog/posts/` is left in place); or (2) revert the v2.1 merge commit on `main` with `git revert -m 1 <merge-sha>` and push. The blog files are self-contained under `blog/` plus small hooks in `build.py`, `template.html`, and this README.
+- The live post list can be pulled without deleting sources by setting `BLOG_MODE` (see v2.1.1). To remove the Blog section entirely, set `BLOG_MODE = "off"` and rebuild, or revert the v2.1 merge commit on `main` with `git revert -m 1 <merge-sha>` and push. The blog files are self-contained under `blog/` plus small hooks in `build.py`, `template.html`, and this README.
 
 ### v2.0 (2026-11-12)
 
@@ -33,8 +38,8 @@ The page includes the official RI Grand Lodge Master Mason Rookie Award checklis
 - `media/img/` - web-sized JPEGs and `thumbs/`.
 - `media/video/` - iPhone-friendly mp4s and `posters/`.
 - `source/` - optional drop folder for the official form photo (`rookie-award-form.jpg`).
-- `blog/posts/*.md` - blog posts (front matter + HTML body). `build.py` writes `blog/index.html` and `blog/<slug>.html` when `BLOG_ENABLED` is True.
-- `blog/_index.html`, `blog/_post.html`, `blog/_shared.css` - blog templates.
+- `blog/posts/*.md` - blog posts (front matter + HTML body). `build.py` writes `blog/index.html` and `blog/<slug>.html` when `BLOG_MODE` is `"live"`. When `BLOG_MODE` is `"coming_soon"`, it writes only the Coming soon `blog/index.html`.
+- `blog/_index.html`, `blog/_post.html`, `blog/_coming_soon.html`, `blog/_shared.css` - blog templates.
 - `blog/media/` - images used in blog posts.
 
 ## Rebuild
@@ -42,7 +47,7 @@ The page includes the official RI Grand Lodge Master Mason Rookie Award checklis
 python3 build.py                      # reads /workspace/harmony-archive
 python3 build.py /path/to/archive     # or another copy
 ```
-Needs Python 3, Pillow (for images), and ffmpeg (for videos). Already-processed media is skipped, so a weekly run can just execute `build.py`, then commit and push. Blog pages are rebuilt from `blog/posts/*.md` in the same run; no extra tools are required. Set `BLOG_ENABLED = False` to skip generating blog pages and hide the nav link.
+Needs Python 3, Pillow (for images), and ffmpeg (for videos). Already-processed media is skipped, so a weekly run can just execute `build.py`, then commit and push. When `BLOG_MODE` is `"live"`, blog pages are rebuilt from `blog/posts/*.md` in the same run; no extra tools are required. Set `BLOG_MODE = "coming_soon"` for a Coming soon page (nav link stays), or `"off"` to skip generating blog pages and hide the nav link. To restore published posts, set `BLOG_MODE = "live"`, rebuild, commit and push.
 
 Inputs: `events.csv`, `ri_lodges.csv`, `links.csv`, `media.csv`, `image_ids.tsv`, `drive_ids.tsv`, `image_text.csv`, plus files under `images/` and `video/`.
 
