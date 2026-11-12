@@ -114,6 +114,7 @@ button.cal-day.empty{border-color:transparent;background:transparent;min-height:
   <a href="#rookie">Rookie award</a>
   <a href="#calendar">Calendar</a>
   <a href="#media">Photos &amp; videos</a>
+  <a href="blog/" id="nav-blog" class="hidden">Blog</a>
   <a href="#resources">Resources</a>
   <a href="#lodges">Lodges</a>
   <a href="#signup" id="nav-signup" class="hidden">Sign up for updates</a>
@@ -213,7 +214,7 @@ const todayISO=(()=>{const t=new Date();return t.getFullYear()+"-"+String(t.getM
 $("#l-folder").href=D.folder;
 $("#m-drive").href=D.folder;
 const c=D.counts;
-$("#counts").innerHTML=`<b>What's in the archive</b><br>${c.upcoming} upcoming events, ${c.past} past events, ${c.other} recurring or undated<br>${c.flyers} flyers, ${c.photos} class/lodge photos (of ${c.archivePhotos} images archived), ${c.videos} Masonic videos — all viewable on this page<br>${c.resources} links, ${c.lodges} lodges in the directory`;
+$("#counts").innerHTML=`<b>What's in the archive</b><br>${c.upcoming} upcoming events, ${c.past} past events, ${c.other} recurring or undated<br>${c.flyers} flyers, ${c.photos} class/lodge photos (of ${c.archivePhotos} images archived), ${c.videos} Masonic videos — all viewable on this page<br>${c.resources} links, ${c.lodges} lodges in the directory${c.blog?`, ${c.blog} blog posts`:""}`;
 
 function legendHTML(){
   return `<span><span class="badge req">R#</span> Required item (deep blue, solid badge)</span>
@@ -481,6 +482,8 @@ if(D.formUrl){
   $("#nav-signup").classList.remove("hidden");
   $("#signup-btn").href=D.formUrl;
 }
+if(D.blogEnabled){ $("#nav-blog").classList.remove("hidden"); }
+
 
 $("#fb").onclick=()=>{const body="What page or section:\n\nWhat's confusing or missing:\n\nWhat would help:\n\nYour first name (optional):\n";location.href="mailto:gregg.oberg39@gmail.com?subject="+encodeURIComponent("Rookie Guide feedback")+"&body="+encodeURIComponent(body)};
 $("#foot").textContent="v"+D.version+" · Built "+D.built+" from the Harmony #9 archive. Unofficial; not an official Grand Lodge publication.";
