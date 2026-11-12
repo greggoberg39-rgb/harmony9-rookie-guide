@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harmony No. 9 Rookie Award Guide</title>
+<style>
+:root{--ink:#1b1f2a;--mute:#4b5563;--line:#d7dbe3;--bg:#f7f6f2;--card:#fff;--accent:#1f3a6e;--soft:#e8eef9}
+*{box-sizing:border-box}
+body{margin:0;font:20px/1.55 Georgia,"Times New Roman",serif;color:var(--ink);background:var(--bg)}
+header{background:var(--accent);color:#fff;padding:28px 20px}
+header h1{margin:0 0 6px;font-size:2rem} header p{margin:0;font-size:1.05rem;opacity:.92}
+nav{position:sticky;top:0;background:#fff;border-bottom:2px solid var(--line);padding:10px 14px;display:flex;flex-wrap:wrap;gap:8px;z-index:5}
+nav a{padding:10px 14px;border:2px solid var(--accent);border-radius:8px;color:var(--accent);text-decoration:none;font-weight:bold;font-size:1rem}
+nav a:hover,nav a:focus{background:var(--accent);color:#fff}
+main{max-width:960px;margin:0 auto;padding:10px 18px 80px}
+section{margin:36px 0} h2{font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:12px 0}
+.card h3{margin:0 0 4px;font-size:1.15rem}.meta{color:var(--mute);font-size:.95rem}
+.date{font-weight:bold;color:var(--accent)}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:2px solid var(--accent);background:#fff;color:var(--accent);cursor:pointer;font-weight:bold}
+button.on{background:var(--accent);color:#fff}
+input[type=search]{font:inherit;padding:10px;border:2px solid var(--line);border-radius:8px;width:100%;max-width:420px}
+a{color:#0b4fb3} .tag{display:inline-block;background:var(--soft);border-radius:6px;padding:2px 8px;font-size:.85rem;margin-left:6px}
+.notice{background:#fff7e0;border:2px solid #e2c15a;border-radius:10px;padding:14px 18px}
+table{border-collapse:collapse;width:100%;font-size:.9rem;background:#fff} th,td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top} th{background:var(--soft)}
+.tablewrap{overflow-x:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.grid a.item{display:block;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px;text-decoration:none}
+footer{text-align:center;color:var(--mute);font-size:.9rem;padding:20px}
+</style></head><body>
+<header><h1>Harmony No. 9 Rookie Award Guide</h1>
+<p>Harmony Lodge No. 9, Cranston, Rhode Island. A brother-friendly guide to the class archive: events, photos, videos and resources.</p></header>
+<nav><a href="#welcome">Welcome</a><a href="#calendar">Calendar</a><a href="#rookie">Rookie events</a><a href="#media">Photos &amp; videos</a><a href="#resources">Resources</a><a href="#lodges">Lodges</a><a href="#feedback">Suggest an improvement</a></nav>
+<main>
+<section id="welcome"><h2>Welcome</h2>
+<p>This guide wraps an archive kept by Gregg's assistant. It collects the class WhatsApp group and Masonic email in one place, so nothing gets lost: <b>events</b> (even ones mentioned in passing), <b>flyers and photos</b>, <b>Masonic videos</b> and <b>useful links</b>.</p>
+<div class="card" id="counts"></div>
+<p>Everything links to a shared Google Drive folder: <a href="" id="l-folder">Harmony #9 Archive</a> (<a href="" id="l-img">Images</a>, <a href="" id="l-vid">Videos</a>). Files open in view-only mode.</p>
+<div class="notice">This guide contains no ritual or study material and never will. Dates come from chat messages, flyers and email. Always confirm with the lodge or the Trestle Board before you travel.</div></section>
+
+<section id="calendar"><h2>Calendar</h2>
+<div class="tabs"><button id="b-up" class="on">Upcoming</button><button id="b-past">Past</button><button id="b-other">Recurring &amp; undated</button></div>
+<p><input type="search" id="q" placeholder="Search events (title, place)"></p>
+<div id="events"></div></section>
+
+<section id="rookie"><h2>Rookie events</h2>
+<div class="notice"><b>Tentative until the official sheet arrives.</b> The official rookie award checklist has not been received yet. Events below are the kinds that are likely to count (degrees, stated meetings, Grand Lodge events, Masonic services). We do not know the award rules, so none are listed. This section will be replaced when the sheet arrives.</div>
+<div class="tabs"><button id="r-up" class="on">Coming up</button><button id="r-past">Already happened</button></div>
+<div id="rookieList"></div></section>
+
+<section id="media"><h2>Photos and videos</h2>
+<p>Open the folders: <a href="" id="m-img">Images folder</a> | <a href="" id="m-vid">Video folder</a>. Personal photos and screenshots are left out of this list.</p>
+<h3>Event flyers</h3><div class="grid" id="flyers"></div>
+<h3>Class and lodge photos</h3><div id="photos"></div>
+<h3>Masonic videos</h3><div class="grid" id="videos"></div>
+<h3>Documents</h3><div class="grid" id="docs"></div></section>
+
+<section id="resources"><h2>Resources and links</h2><div class="grid" id="res"></div>
+<h3>Masonic posts shared in the class chat</h3><div class="grid" id="reading"></div></section>
+
+<section id="lodges"><h2>Rhode Island lodge directory</h2>
+<p>Meeting nights come from lodge websites and the Lodge Locator. Please confirm before visiting.</p>
+<div class="tablewrap"><table id="ltable"></table></div></section>
+
+<section id="feedback"><h2>Suggest an improvement</h2>
+<p>Beta testers: tell us what's confusing or missing. This opens an email to Gregg with a template.</p>
+<p><button id="fb">Email my suggestion</button></p><p class="meta">Or write to gregg.oberg39@gmail.com with the subject "Rookie Guide feedback".</p></section>
+</main><footer id="foot"></footer>
+<script>
+const D=/*__DATA__*/null;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const linkify=s=>esc(s).replace(/(https?:\/\/[^\s)]+)/g,'<a href="$1">$1</a>');
+const fmt=d=>{if(!d)return"";const [y,m,dd]=d.split("-").map(Number);return new Date(y,m-1,dd).toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric",year:"numeric"})};
+$("#l-folder").href=D.folder;$("#l-img").href=D.imagesFolder;$("#l-vid").href=D.videosFolder;$("#m-img").href=D.imagesFolder;$("#m-vid").href=D.videosFolder;
+const c=D.counts;$("#counts").innerHTML=`<b>What's in the archive</b><br>${c.upcoming} upcoming events, ${c.past} past events, ${c.other} recurring or undated<br>${c.flyers} flyers, ${c.photos} class/lodge photos (of ${c.archivePhotos} images archived), ${c.videos} Masonic videos<br>${c.resources} links, ${c.lodges} lodges in the directory`;
+const card=e=>`<div class="card"><h3>${esc(e.title)}${e.tag?`<span class="tag">${esc(e.tag)}</span>`:""}</h3><div><span class="date">${e.date?fmt(e.date):esc(e.dateText||"Date not known")}</span>${e.time?" &middot; "+esc(e.time):""}</div>${e.location?`<div>${esc(e.location)}</div>`:""}${e.note?`<div>${linkify(e.note)}</div>`:""}<div class="meta">Source: ${esc(e.source)}</div></div>`;
+let mode="upcoming";
+function renderEvents(){const q=$("#q").value.toLowerCase();const L=D.events[mode].filter(e=>(e.title+" "+e.location).toLowerCase().includes(q));
+$("#events").innerHTML=L.map(card).join("")||"<p>Nothing matches.</p>";
+for(const [id,m] of [["b-up","upcoming"],["b-past","past"],["b-other","other"]])$("#"+id).className=mode==m?"on":""}
+$("#b-up").onclick=()=>{mode="upcoming";renderEvents()};$("#b-past").onclick=()=>{mode="past";renderEvents()};$("#b-other").onclick=()=>{mode="other";renderEvents()};$("#q").oninput=renderEvents;renderEvents();
+const today=new Date().toISOString().slice(0,10);let rm="up";
+function renderRookie(){const L=D.rookie.filter(e=>rm=="up"?e.date>=today:e.date<today);$("#rookieList").innerHTML=L.map(card).join("")||"<p>None in this group.</p>";$("#r-up").className=rm=="up"?"on":"";$("#r-past").className=rm=="past"?"on":""}
+$("#r-up").onclick=()=>{rm="up";renderRookie()};$("#r-past").onclick=()=>{rm="past";renderRookie()};renderRookie();
+const item=(t,s,u)=>`<a class="item" href="${esc(u)}"><b>${esc(t)}</b><div class="meta">${esc(s)}</div></a>`;
+$("#flyers").innerHTML=D.flyers.map(f=>item(f.title,fmt(f.date)+" - open in Drive",f.url)).join("");
+const groups=[...new Set(D.photos.map(p=>p.group))];
+$("#photos").innerHTML=groups.map(g=>`<h4>${esc(g)}</h4><div class="grid">${D.photos.filter(p=>p.group==g).map((p,i)=>item("Photo "+(i+1),fmt(p.date),p.url)).join("")}</div>`).join("");
+$("#videos").innerHTML=D.videos.map(v=>item(v.title,fmt(v.date)+" - open in Drive",v.url)).join("");
+$("#docs").innerHTML=D.docs.map(d=>item(d.title,"Open in Drive",d.url)).join("");
+$("#res").innerHTML=D.resources.map(r=>item(r.title,r.note,r.url)).join("");
+$("#reading").innerHTML=D.reading.map(r=>item(r.title,r.note,r.url)).join("");
+$("#ltable").innerHTML="<tr><th>Lodge</th><th>No.</th><th>Address</th><th>Meets</th><th>Open</th><th>Dark</th><th>Status</th></tr>"+D.lodges.map(l=>`<tr><td>${l.website?`<a href="${esc(l.website)}">${esc(l.name)}</a>`:esc(l.name)}</td><td>${esc(l.no)}</td><td>${esc(l.address)}</td><td>${esc(l.meets)}</td><td>${esc(l.open)}</td><td>${esc(l.dark)}</td><td>${esc(l.status.replace(/_/g," "))}</td></tr>`).join("");
+$("#fb").onclick=()=>{const body="What page or section:\n\nWhat's confusing or missing:\n\nWhat would help:\n\nYour first name (optional):\n";location.href="mailto:gregg.oberg39@gmail.com?subject="+encodeURIComponent("Rookie Guide feedback")+"&body="+encodeURIComponent(body)};
+$("#foot").textContent="Built "+D.built+" from the Harmony #9 archive. Unofficial; not an official Grand Lodge publication.";
+</script></body></html>
