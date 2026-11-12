@@ -9,7 +9,13 @@
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-11-04",
    "group": "upcoming",
-   "note": "Per a brother in the class chat, attending is part of the rookie award (official sheet still pending)"
+   "rookieItems": [
+    {
+     "code": "A5",
+     "tentative": false
+    }
+   ],
+   "note": "Per a brother in the class chat, attending is part of the rookie award (official sheet now on this page; Lodge Master and Secretary sign off)"
   },
   {
    "date": "2026-11-21",
@@ -20,6 +26,12 @@
    "source": "Masonic email (Grand Lodge / lodge notice)",
    "firstSeen": "2026-11-09",
    "group": "upcoming",
+   "rookieItems": [
+    {
+     "code": "R4",
+     "tentative": true
+    }
+   ],
    "note": "$40 per person. Tickets: https://rimasons.squarespace.com/shop/p/fall-festival (online sales close Fri Nov 13, noon; none at the door)"
   },
   {
@@ -29,7 +41,17 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Standing schedule (1st Tuesday; dark July and August). Confirm in the monthly Trestle Board",
    "firstSeen": "",
-   "group": "upcoming"
+   "group": "upcoming",
+   "rookieItems": [
+    {
+     "code": "R3",
+     "tentative": false
+    },
+    {
+     "code": "A3",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2026-12-04",
@@ -39,7 +61,13 @@
    "location": "Manchester Lodge No. 12, Manchester Hall, 585 Washington St, Anthony Village, Coventry, RI 02816",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-11-11",
-   "group": "upcoming"
+   "group": "upcoming",
+   "rookieItems": [
+    {
+     "code": "R1",
+     "tentative": false
+    }
+   ]
   },
   {
    "date": "2027-01-05",
@@ -48,7 +76,17 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Standing schedule (1st Tuesday; dark July and August). Confirm in the monthly Trestle Board",
    "firstSeen": "",
-   "group": "upcoming"
+   "group": "upcoming",
+   "rookieItems": [
+    {
+     "code": "R3",
+     "tentative": false
+    },
+    {
+     "code": "A3",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2027-02-02",
@@ -57,7 +95,17 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Standing schedule (1st Tuesday; dark July and August). Confirm in the monthly Trestle Board",
    "firstSeen": "",
-   "group": "upcoming"
+   "group": "upcoming",
+   "rookieItems": [
+    {
+     "code": "R3",
+     "tentative": false
+    },
+    {
+     "code": "A3",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2027-03-02",
@@ -66,7 +114,17 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Standing schedule (1st Tuesday; dark July and August). Confirm in the monthly Trestle Board",
    "firstSeen": "",
-   "group": "upcoming"
+   "group": "upcoming",
+   "rookieItems": [
+    {
+     "code": "R3",
+     "tentative": false
+    },
+    {
+     "code": "A3",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2027-04-06",
@@ -75,7 +133,17 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Standing schedule (1st Tuesday; dark July and August). Confirm in the monthly Trestle Board",
    "firstSeen": "",
-   "group": "upcoming"
+   "group": "upcoming",
+   "rookieItems": [
+    {
+     "code": "R3",
+     "tentative": false
+    },
+    {
+     "code": "A3",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2027-05-04",
@@ -84,7 +152,17 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Standing schedule (1st Tuesday; dark July and August). Confirm in the monthly Trestle Board",
    "firstSeen": "",
-   "group": "upcoming"
+   "group": "upcoming",
+   "rookieItems": [
+    {
+     "code": "R3",
+     "tentative": false
+    },
+    {
+     "code": "A3",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2027-06-01",
@@ -93,7 +171,17 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Standing schedule (1st Tuesday; dark July and August). Confirm in the monthly Trestle Board",
    "firstSeen": "",
-   "group": "upcoming"
+   "group": "upcoming",
+   "rookieItems": [
+    {
+     "code": "R3",
+     "tentative": false
+    },
+    {
+     "code": "A3",
+     "tentative": true
+    }
+   ]
   }
  ],
  "past": [
@@ -105,7 +193,17 @@
    "location": "Shriners Imperial Room, Cranston RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "~2026-10-19",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "R4",
+     "tentative": true
+    },
+    {
+     "code": "A3",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2026-11-07",
@@ -115,7 +213,13 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "October 2026 Trestle Board",
    "firstSeen": "2026-10-01",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "R3",
+     "tentative": false
+    }
+   ]
   },
   {
    "date": "2026-11-05",
@@ -125,7 +229,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-10-31",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-11-03",
@@ -135,7 +240,13 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-10-08",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "R3",
+     "tentative": false
+    }
+   ]
   },
   {
    "date": "2026-11-03",
@@ -145,7 +256,8 @@
    "location": "",
    "source": "Flyer shared in the class chat",
    "firstSeen": "2026-10-13",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-11-02",
@@ -155,7 +267,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-10-31",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-10-29",
@@ -165,7 +278,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "~2026-10-19",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-10-29",
@@ -175,7 +289,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-10-29",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-10-27",
@@ -185,7 +300,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-10-27",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-10-26",
@@ -195,7 +311,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-10-25",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-10-26",
@@ -205,7 +322,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-10-26",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-10-25",
@@ -215,7 +333,8 @@
    "location": "Starbucks, Pawtucket RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-10-25",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-10-25",
@@ -225,7 +344,8 @@
    "location": "White Ach, Pawtucket RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-10-25",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-10-24",
@@ -235,7 +355,13 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-09-01",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "R4",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2026-10-22",
@@ -245,7 +371,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-10-15",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-10-21",
@@ -255,7 +382,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "~2026-10-20",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-10-17",
@@ -265,7 +393,13 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "~2026-10-17",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "A6",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2026-10-15",
@@ -275,7 +409,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-10-15",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-10-13",
@@ -285,7 +420,13 @@
    "location": "Grand Lodge of Rhode Island, East Providence (Taunton Ave building)",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-09-02",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "R6",
+     "tentative": false
+    }
+   ]
   },
   {
    "date": "2026-10-12",
@@ -295,7 +436,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-10-08",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-10-10",
@@ -305,7 +447,8 @@
    "location": "",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-10-10",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-10-10",
@@ -315,7 +458,13 @@
    "location": "See the flyer in the Photos section",
    "source": "Flyer shared in the class chat",
    "firstSeen": "2026-10-09",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "R4",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2026-10-08",
@@ -325,7 +474,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-10-08",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-10-07",
@@ -335,7 +485,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-10-07",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-10-06",
@@ -345,7 +496,13 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-10-05",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "R3",
+     "tentative": false
+    }
+   ]
   },
   {
    "date": "2026-10-03",
@@ -355,7 +512,13 @@
    "location": "The park (Masonic Youth Park, 116 Long St, Warwick, RI)",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-09-02",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "R4",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2026-10-03",
@@ -365,7 +528,8 @@
    "location": "A brother's home (address not shown)",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-10-03",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-10-01",
@@ -375,7 +539,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-10-01",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-09-24",
@@ -385,7 +550,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-09-18",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-09-17",
@@ -395,7 +561,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-09-17",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-09-16",
@@ -405,7 +572,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-09-15",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-09-12",
@@ -415,7 +583,17 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-09-12",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "R4",
+     "tentative": true
+    },
+    {
+     "code": "A3",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2026-09-10",
@@ -425,7 +603,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-09-10",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-09-08",
@@ -435,7 +614,13 @@
    "location": "Grand Lodge of Rhode Island, East Providence (Taunton Ave building)",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-09-07",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "R6",
+     "tentative": false
+    }
+   ]
   },
   {
    "date": "2026-09-06",
@@ -445,7 +630,8 @@
    "location": "A brother's home (address not shown)",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-09-06",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-09-03",
@@ -455,7 +641,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-09-03",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-09-01",
@@ -465,7 +652,13 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-09-01",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "R3",
+     "tentative": false
+    }
+   ]
   },
   {
    "date": "2026-08-30",
@@ -475,7 +668,8 @@
    "location": "The park (Masonic Youth Park, 116 Long St, Warwick, RI)",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-08-30",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-08-30",
@@ -485,7 +679,8 @@
    "location": "A brother's home (address not shown)",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-08-30",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-08-29",
@@ -495,7 +690,13 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Flyer shared in the class chat",
    "firstSeen": "2026-07-28",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "R4",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2026-08-27",
@@ -505,7 +706,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-08-26",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-08-25",
@@ -515,7 +717,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-08-25",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-08-22",
@@ -525,7 +728,8 @@
    "location": "The park (Masonic Youth Park, 116 Long St, Warwick, RI)",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-07-29",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-08-20",
@@ -535,7 +739,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-08-20",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-08-19",
@@ -545,7 +750,8 @@
    "location": "The park (Masonic Youth Park, 116 Long St, Warwick, RI)",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-08-19",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-08-17",
@@ -555,7 +761,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-08-17",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-08-16",
@@ -565,7 +772,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-08-07",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-08-15",
@@ -575,7 +783,8 @@
    "location": "Not stated (see the link shared in the chat)",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-08-11",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-08-13",
@@ -585,7 +794,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-08-13",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-08-10",
@@ -595,7 +805,8 @@
    "location": "The park (Masonic Youth Park, 116 Long St, Warwick, RI)",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-08-10",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-08-09",
@@ -605,7 +816,13 @@
    "location": "The park (Masonic Youth Park, 116 Long St, Warwick, RI)",
    "source": "Flyer shared in the class chat",
    "firstSeen": "2026-08-08",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "R4",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2026-08-08",
@@ -615,7 +832,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-08-05",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-08-07",
@@ -625,7 +843,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-08-07",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-08-06",
@@ -635,7 +854,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-08-05",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-08-02",
@@ -645,7 +865,8 @@
    "location": "The park (Masonic Youth Park, 116 Long St, Warwick, RI)",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-08-01",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-07-30",
@@ -655,7 +876,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-07-24",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-07-27",
@@ -665,7 +887,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-07-27",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-07-26",
@@ -675,7 +898,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-07-26",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-07-25",
@@ -685,7 +909,17 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-07-22",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "R4",
+     "tentative": true
+    },
+    {
+     "code": "A3",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2026-07-23",
@@ -695,7 +929,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-07-23",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-07-19",
@@ -705,7 +940,17 @@
    "location": "The park (Masonic Youth Park, 116 Long St, Warwick, RI)",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-07-14",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "R4",
+     "tentative": true
+    },
+    {
+     "code": "A3",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2026-07-18",
@@ -715,7 +960,8 @@
    "location": "",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-07-16",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-07-16",
@@ -725,7 +971,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-07-16",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-07-15",
@@ -735,7 +982,8 @@
    "location": "116 Long St, Warwick, RI 02886 (Shriner park)",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-07-13",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-07-14",
@@ -745,7 +993,13 @@
    "location": "A brother's home (address not shown)",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-07-13",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "R4",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2026-07-12",
@@ -755,7 +1009,8 @@
    "location": "The park (Masonic Youth Park, 116 Long St, Warwick, RI)",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-07-11",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-07-09",
@@ -765,7 +1020,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-07-09",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-07-07",
@@ -775,7 +1031,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-07-07",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-07-03",
@@ -785,7 +1042,13 @@
    "location": "See the flyer shared in the chat (Jun 29)",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-06-29",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "R4",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2026-07-02",
@@ -795,7 +1058,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-07-01",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-06-27",
@@ -805,7 +1069,13 @@
    "location": "Meeting point not stated",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-06-26",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "A9",
+     "tentative": false
+    }
+   ]
   },
   {
    "date": "2026-06-26",
@@ -815,7 +1085,8 @@
    "location": "Roger Williams Park, Providence",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-06-27",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-06-25",
@@ -825,7 +1096,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-06-25",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-06-17",
@@ -835,7 +1107,17 @@
    "location": "Masonic Youth Center Park, 116 Long St, Warwick RI 02886",
    "source": "Flyer shared in the class chat",
    "firstSeen": "2026-06-09",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "R4",
+     "tentative": true
+    },
+    {
+     "code": "A3",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2026-06-13",
@@ -845,7 +1127,8 @@
    "location": "64 Columbia Street, Wakefield RI (building of Hope Lodge No. 25)",
    "source": "Flyer shared in the class chat",
    "firstSeen": "2026-05-20",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-05-22",
@@ -855,7 +1138,13 @@
    "location": "Rising Sun Lodge No. 30, 222 Taunton Avenue, East Providence, RI",
    "source": "Flyer shared in the class chat",
    "firstSeen": "2026-05-22",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "R3",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2026-05-18",
@@ -865,7 +1154,17 @@
    "location": "Rhodes on the Pawtuxet",
    "source": "Masonic email (Grand Lodge / lodge notice)",
    "firstSeen": "2026-04-22",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "R4",
+     "tentative": true
+    },
+    {
+     "code": "A3",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2026-05-12",
@@ -875,7 +1174,8 @@
    "location": "Washington Lodge No. 3, 39 Baker Street, Warren, RI",
    "source": "Masonic email (Grand Lodge / lodge notice)",
    "firstSeen": "2026-05-09",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-05-02",
@@ -885,7 +1185,8 @@
    "location": "222 Taunton Ave, East Providence, RI (shared Masonic building)",
    "source": "Flyer shared in the class chat",
    "firstSeen": "2026-05-02",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-04-18",
@@ -895,7 +1196,8 @@
    "location": "Quidnessett Country Club, 950 North Quidnessett Road, North Kingstown, RI 02852",
    "source": "Masonic email (Grand Lodge / lodge notice)",
    "firstSeen": "2026-03-18",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2026-04-14",
@@ -905,7 +1207,13 @@
    "location": "Carpenter-Jenks Funeral Home, 659 E. Greenwich Ave, West Warwick, RI (address from an earlier Carpenter-Jenks notice; confirm)",
    "source": "Masonic email (Grand Lodge / lodge notice)",
    "firstSeen": "2026-04-08",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "A5",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2026-04-13",
@@ -915,7 +1223,13 @@
    "location": "Carpenter-Jenks Funeral Home, 659 E. Greenwich Ave, West Warwick, RI (address from an earlier Carpenter-Jenks notice; confirm)",
    "source": "Masonic email (Grand Lodge / lodge notice)",
    "firstSeen": "2026-04-08",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "A5",
+     "tentative": false
+    }
+   ]
   },
   {
    "date": "2025-08-02",
@@ -925,7 +1239,13 @@
    "location": "Warwick, RI (exact site not stated)",
    "source": "Masonic email (Grand Lodge / lodge notice)",
    "firstSeen": "2025-07-29",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "R4",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2025-01-15",
@@ -935,7 +1255,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Masonic email (Grand Lodge / lodge notice)",
    "firstSeen": "2025-01-14",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2024-12-14",
@@ -945,7 +1266,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Masonic email (Grand Lodge / lodge notice)",
    "firstSeen": "2024-12-12",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2024-09-03",
@@ -955,7 +1277,13 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Masonic email (Grand Lodge / lodge notice)",
    "firstSeen": "2024-12-01",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "A3",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "2016-04-13",
@@ -965,7 +1293,8 @@
    "location": "186 Tremont St., Boston, 6th Floor",
    "source": "Masonic email (Grand Lodge / lodge notice)",
    "firstSeen": "2016-04-05",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2015-11-11",
@@ -975,7 +1304,8 @@
    "location": "186 Tremont St., Boston, 6th Floor",
    "source": "Masonic email (Grand Lodge / lodge notice)",
    "firstSeen": "2015-10-30",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2015-05-13",
@@ -985,7 +1315,8 @@
    "location": "186 Tremont St., Boston, 6th Floor",
    "source": "Masonic email (Grand Lodge / lodge notice)",
    "firstSeen": "2015-05-08",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   },
   {
    "date": "2015-04-01",
@@ -995,7 +1326,8 @@
    "location": "Joseph Webb Lodge building (later emails: 186 Tremont St., Boston, 6th Floor)",
    "source": "Masonic email (Grand Lodge / lodge notice)",
    "firstSeen": "2015-03-14",
-   "group": "past"
+   "group": "past",
+   "rookieItems": []
   }
  ],
  "other": [
@@ -1007,7 +1339,8 @@
    "location": "The park (Masonic Youth Park, 116 Long St, Warwick, RI)",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-10-31",
-   "group": "ongoing"
+   "group": "ongoing",
+   "rookieItems": []
   },
   {
    "date": "",
@@ -1017,7 +1350,8 @@
    "location": "",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-06-25",
-   "group": "undated"
+   "group": "undated",
+   "rookieItems": []
   },
   {
    "date": "",
@@ -1027,7 +1361,8 @@
    "location": "Not stated (see the link shared in the chat)",
    "source": "Flyer shared in the class chat",
    "firstSeen": "2026-10-14",
-   "group": "undated"
+   "group": "undated",
+   "rookieItems": []
   },
   {
    "date": "",
@@ -1037,7 +1372,8 @@
    "location": "Harmony Lodge No. 9 at Doric Masonic Center, 1237 Reservoir Ave, Cranston, RI",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-10-31",
-   "group": "ongoing"
+   "group": "ongoing",
+   "rookieItems": []
   },
   {
    "date": "",
@@ -1047,7 +1383,8 @@
    "location": "TBD",
    "source": "Class WhatsApp chat",
    "firstSeen": "2026-10-31",
-   "group": "ongoing"
+   "group": "ongoing",
+   "rookieItems": []
   },
   {
    "date": "",
@@ -1057,7 +1394,13 @@
    "location": "",
    "source": "Masonic email (Grand Lodge / lodge notice)",
    "firstSeen": "2024-12-04",
-   "group": "past"
+   "group": "past",
+   "rookieItems": [
+    {
+     "code": "R4",
+     "tentative": true
+    }
+   ]
   },
   {
    "date": "",
@@ -1067,7 +1410,13 @@
    "location": "Morning Star Lodge No. 13, 142 Clinton Street, Woonsocket, RI",
    "source": "Masonic email (Grand Lodge / lodge notice)",
    "firstSeen": "2026-05-15",
-   "group": "undated"
+   "group": "undated",
+   "rookieItems": [
+    {
+     "code": "A5",
+     "tentative": false
+    }
+   ]
   }
  ]
 }

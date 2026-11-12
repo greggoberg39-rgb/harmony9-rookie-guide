@@ -3,7 +3,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Harmony No. 9 Rookie Award Guide</title>
 <style>
-:root{--ink:#1b1f2a;--mute:#4b5563;--line:#d7dbe3;--bg:#f7f6f2;--card:#fff;--accent:#1f3a6e;--soft:#e8eef9}
+:root{--ink:#1b1f2a;--mute:#4b5563;--line:#d7dbe3;--bg:#f7f6f2;--card:#fff;--accent:#1f3a6e;--soft:#e8eef9;
+--req:#1f4e9c;--alt:#c98a00;--alt-text:#7a5500;--neutral:#5c6370}
 *{box-sizing:border-box}
 body{margin:0;font:20px/1.55 Georgia,"Times New Roman",serif;color:var(--ink);background:var(--bg)}
 header{background:var(--accent);color:#fff;padding:28px 20px}
@@ -19,40 +20,155 @@ section{margin:36px 0} h2{font-size:1.6rem;border-bottom:3px solid var(--accent)
 .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
 button{font:inherit;padding:10px 18px;border-radius:8px;border:2px solid var(--accent);background:#fff;color:var(--accent);cursor:pointer;font-weight:bold}
 button.on{background:var(--accent);color:#fff}
-input[type=search]{font:inherit;padding:10px;border:2px solid var(--line);border-radius:8px;width:100%;max-width:420px}
-a{color:#0b4fb3} .tag{display:inline-block;background:var(--soft);border-radius:6px;padding:2px 8px;font-size:.85rem;margin-left:6px}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #000;outline-offset:2px}
+input[type=search],input[type=date]{font:inherit;padding:10px;border:2px solid var(--line);border-radius:8px}
+input[type=search]{width:100%;max-width:420px}
+a{color:#0b4fb3}
 .notice{background:#fff7e0;border:2px solid #e2c15a;border-radius:10px;padding:14px 18px}
+.admin-note{background:#eef2f7;border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:.95rem;margin:12px 0}
 table{border-collapse:collapse;width:100%;font-size:.9rem;background:#fff} th,td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top} th{background:var(--soft)}
 .tablewrap{overflow-x:auto}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
-.grid a.item{display:block;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px;text-decoration:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.grid a.item,.thumb{display:block;background:#fff;border:1px solid var(--line);border-radius:10px;padding:0;text-decoration:none;color:inherit;overflow:hidden;cursor:pointer}
+.thumb img,.thumb-ph{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;background:#e8e8e8}
+.thumb .cap{padding:8px 10px;font-size:.85rem}
+.vid{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:0}
+.vid video{width:100%;display:block;background:#111;max-height:70vh}
+.vid figcaption{padding:10px 12px}
+.vidgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
 footer{text-align:center;color:var(--mute);font-size:.9rem;padding:20px}
+
+/* badges: never color-only; always include the R# / A# text */
+.badge{display:inline-block;font:bold .75rem/1.2 system-ui,sans-serif;padding:3px 7px;border-radius:4px;margin:0 4px 4px 0;vertical-align:middle;letter-spacing:.02em}
+.badge.req{background:var(--req);color:#fff;border:2px solid var(--req)}
+.badge.alt{background:#fff;color:var(--alt-text);border:2px solid var(--alt)}
+.badge.tent{position:relative}
+.badge .q{font-weight:bold}
+.tent-note{font-size:.8rem;color:var(--mute)}
+.legend{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;margin:10px 0 14px;font-size:.95rem}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;border:2px solid transparent}
+.dot.req{background:var(--req);border-color:var(--req)}
+.dot.alt{background:#fff;border-color:var(--alt)}
+.dot.none{background:var(--neutral);border-color:var(--neutral)}
+
+/* checklist tracker */
+.check-item{display:grid;grid-template-columns:auto 1fr auto;gap:10px 12px;align-items:start}
+.check-item + .check-item{border-top:1px solid var(--line);padding-top:12px}
+.check-item input[type=checkbox]{width:24px;height:24px;margin-top:4px}
+.check-item.done h3{text-decoration:line-through;opacity:.75}
+.progress{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+.pills{background:var(--soft);border-radius:999px;padding:8px 14px;font-weight:bold}
+.pills.met{background:#dcecd4}
+.match-box{margin:8px 0 0;padding:10px;background:var(--soft);border-radius:8px}
+.hidden{display:none}
+
+/* calendar month grid */
+.cal-nav{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:12px 0}
+.cal-nav h3{margin:0;font-size:1.2rem;flex:1;text-align:center}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-dow{text-align:center;font-size:.8rem;font-weight:bold;color:var(--mute);padding:6px 0}
+.cal-day{min-height:88px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:4px;cursor:pointer;text-align:left}
+.cal-day.empty{background:transparent;border-color:transparent;cursor:default;min-height:24px}
+.cal-day.today{box-shadow:inset 0 0 0 2px var(--accent)}
+.cal-day.selected{background:var(--soft)}
+.cal-day .n{font-weight:bold;font-size:.85rem;display:block}
+.cal-ev{display:block;font-size:.68rem;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#eef0f3;border-radius:3px;padding:2px 4px;margin-top:2px;color:var(--ink)}
+.cal-ev.has-req{background:#d9e4f7}
+.cal-ev.has-alt{background:#f8efd0}
+.cal-dots{display:none;gap:3px;flex-wrap:wrap;margin-top:4px}
+@media (max-width:700px){
+  .cal-day{min-height:48px;padding:3px}
+  .cal-ev{display:none}
+  .cal-dots{display:flex}
+  body{font-size:18px}
+}
+@media print{
+  nav,header,#welcome,#calendar,#media,#resources,#lodges,#feedback,#signup,.tabs,button,.no-print{display:none!important}
+  #rookie,footer{display:block!important}
+  .match-box{display:none!important}
+  body{background:#fff;font-size:12pt}
+  .card{break-inside:avoid}
+}
+
+/* lightbox */
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:20;display:none;flex-direction:column;color:#fff}
+#lb.on{display:flex}
+#lb .lb-stage{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;position:relative;touch-action:pan-y}
+#lb img{max-width:100%;max-height:80vh;object-fit:contain}
+#lb .lb-bar{padding:10px 16px 18px;text-align:center}
+#lb button{border-color:#fff;color:#fff;background:transparent}
+#lb a{color:#cde}
+#lb .lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);border:2px solid #fff;color:#fff;font-size:1.5rem;padding:8px 14px}
+#lb .lb-prev{left:8px} #lb .lb-next{right:8px} #lb .lb-close{position:absolute;top:8px;right:8px;z-index:2}
+button.thumb,button.cal-day{font:inherit;font-weight:normal;color:inherit;padding:0;border:1px solid var(--line);background:#fff;text-align:left}
+button.cal-day{padding:4px;min-height:88px}
+button.cal-day.selected{background:var(--soft);color:var(--ink)}
+button.cal-day.empty{border-color:transparent;background:transparent;min-height:24px;cursor:default}
+@media (max-width:700px){button.cal-day{min-height:48px}}
 </style></head><body>
 <header><h1>Harmony No. 9 Rookie Award Guide</h1>
-<p>Harmony Lodge No. 9, Cranston, Rhode Island. A brother-friendly guide to the class archive: events, photos, videos and resources.</p></header>
-<nav><a href="#welcome">Welcome</a><a href="#calendar">Calendar</a><a href="#rookie">Rookie events</a><a href="#media">Photos &amp; videos</a><a href="#resources">Resources</a><a href="#lodges">Lodges</a><a href="#feedback">Suggest an improvement</a></nav>
+<p>Harmony Lodge No. 9, Cranston, Rhode Island. A brother-friendly guide to the class archive: the official Rookie Award checklist, events, photos, videos and resources.</p></header>
+<nav>
+  <a href="#welcome">Welcome</a>
+  <a href="#rookie">Rookie award</a>
+  <a href="#calendar">Calendar</a>
+  <a href="#media">Photos &amp; videos</a>
+  <a href="#resources">Resources</a>
+  <a href="#lodges">Lodges</a>
+  <a href="#signup" id="nav-signup" class="hidden">Sign up for updates</a>
+  <a href="#feedback">Suggest an improvement</a>
+</nav>
 <main>
 <section id="welcome"><h2>Welcome</h2>
-<p>This guide wraps an archive kept by Gregg's assistant. It collects the class WhatsApp group and Masonic email in one place, so nothing gets lost: <b>events</b> (even ones mentioned in passing), <b>flyers and photos</b>, <b>Masonic videos</b> and <b>useful links</b>.</p>
+<p>This guide wraps an archive kept by Gregg's assistant. It collects the class WhatsApp group and Masonic email in one place, so nothing gets lost: the official <b>Master Mason Rookie Award</b> checklist, <b>events</b> (even ones mentioned in passing), <b>flyers and photos</b>, <b>Masonic videos</b> and <b>useful links</b>.</p>
 <div class="card" id="counts"></div>
-<p>Everything links to a shared Google Drive folder: <a href="" id="l-folder">Harmony #9 Archive</a> (<a href="" id="l-img">Images</a>, <a href="" id="l-vid">Videos</a>). Files open in view-only mode.</p>
+<p>Photos, flyers and videos play right on this page, including on an iPhone. Documents still open in the shared <a href="" id="l-folder">Google Drive archive</a>.</p>
 <div class="notice">This guide contains no ritual or study material and never will. Dates come from chat messages, flyers and email. Always confirm with the lodge or the Trestle Board before you travel.</div></section>
 
+<section id="rookie"><h2>Master Mason Rookie Award</h2>
+<p>This is the official Rhode Island Grand Lodge <i>Master Mason Rookie Award – Checkoff List</i> — the list most brothers already know. Rule: <b id="rule"></b></p>
+<p id="form-link"></p>
+<div class="notice" id="signoff"></div>
+<div class="legend" id="legend"></div>
+<div class="progress" id="progress"></div>
+<div class="tabs no-print"><button type="button" id="print-check">Printable view</button><button type="button" id="reset-check">Reset my tracker</button></div>
+<h3>Required <span class="meta">(all 6)</span></h3>
+<div id="req-list"></div>
+<h3>Alternates <span class="meta">(any 5 of 11)</span></h3>
+<div id="alt-list"></div>
+<p class="meta" id="submit-note"></p>
+<p class="meta no-print">Your checkboxes and dates stay in this browser only (localStorage). They are not sent anywhere.</p>
+</section>
+
 <section id="calendar"><h2>Calendar</h2>
-<div class="tabs"><button id="b-up" class="on">Upcoming</button><button id="b-past">Past</button><button id="b-other">Recurring &amp; undated</button></div>
-<p><input type="search" id="q" placeholder="Search events (title, place)"></p>
+<div class="tabs">
+  <button type="button" id="v-list" class="on">List</button>
+  <button type="button" id="v-cal">View in calendar format</button>
+</div>
+<div id="list-controls">
+  <div class="tabs"><button type="button" id="b-up" class="on">Upcoming</button><button type="button" id="b-past">Past</button><button type="button" id="b-other">Recurring &amp; undated</button></div>
+  <p><input type="search" id="q" placeholder="Search events (title, place)"></p>
+</div>
+<div class="legend" id="cal-legend"></div>
+<div id="cal-view" class="hidden">
+  <div class="cal-nav">
+    <button type="button" id="cal-prev">Previous month</button>
+    <h3 id="cal-label"></h3>
+    <button type="button" id="cal-next">Next month</button>
+  </div>
+  <div class="cal-grid" id="cal-grid"></div>
+  <div id="cal-day-list"></div>
+  <p class="meta">Recurring and undated events stay in the list view. Dates in a cell with a deep-blue or gold mark may count toward the Rookie Award; tap a day to read them.</p>
+</div>
 <div id="events"></div></section>
 
-<section id="rookie"><h2>Rookie events</h2>
-<div class="notice"><b>Tentative until the official sheet arrives.</b> The official rookie award checklist has not been received yet. Events below are the kinds that are likely to count (degrees, stated meetings, Grand Lodge events, Masonic services). We do not know the award rules, so none are listed. This section will be replaced when the sheet arrives.</div>
-<div class="tabs"><button id="r-up" class="on">Coming up</button><button id="r-past">Already happened</button></div>
-<div id="rookieList"></div></section>
-
 <section id="media"><h2>Photos and videos</h2>
-<p>Open the folders: <a href="" id="m-img">Images folder</a> | <a href="" id="m-vid">Video folder</a>. Personal photos and screenshots are left out of this list.</p>
+<p class="admin-note">Admins: <a href="" id="m-drive">download full-quality originals from the Google Drive archive</a>.</p>
+<p>Personal photos and screenshots are left out of this list. Tap a picture to open it full size; swipe to see the next one. Videos play on this page (including on iPhone).</p>
 <h3>Event flyers</h3><div class="grid" id="flyers"></div>
 <h3>Class and lodge photos</h3><div id="photos"></div>
-<h3>Masonic videos</h3><div class="grid" id="videos"></div>
+<h3>Masonic videos</h3><div class="vidgrid" id="videos"></div>
 <h3>Documents</h3><div class="grid" id="docs"></div></section>
 
 <section id="resources"><h2>Resources and links</h2><div class="grid" id="res"></div>
@@ -62,36 +178,310 @@ footer{text-align:center;color:var(--mute);font-size:.9rem;padding:20px}
 <p>Meeting nights come from lodge websites and the Lodge Locator. Please confirm before visiting.</p>
 <div class="tablewrap"><table id="ltable"></table></div></section>
 
+<section id="signup" class="hidden"><h2>Sign up for updates</h2>
+<p>Get a note when the guide is updated. This opens a short Google Form in a new tab (Name and Email required; lodge name/number optional).</p>
+<p><a id="signup-btn" class="item" href="#" target="_blank" rel="noopener"><button type="button">Sign up for updates</button></a></p>
+</section>
+
 <section id="feedback"><h2>Suggest an improvement</h2>
 <p>Beta testers: tell us what's confusing or missing. This opens an email to Gregg with a template.</p>
-<p><button id="fb">Email my suggestion</button></p><p class="meta">Or write to gregg.oberg39@gmail.com with the subject "Rookie Guide feedback".</p></section>
+<p><button type="button" id="fb">Email my suggestion</button></p><p class="meta">Or write to gregg.oberg39@gmail.com with the subject "Rookie Guide feedback".</p></section>
 </main><footer id="foot"></footer>
+
+<div id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button type="button" class="lb-close" id="lb-close">Close</button>
+  <div class="lb-stage" id="lb-stage">
+    <button type="button" class="lb-nav lb-prev" id="lb-prev" aria-label="Previous photo">‹</button>
+    <img id="lb-img" alt="">
+    <button type="button" class="lb-nav lb-next" id="lb-next" aria-label="Next photo">›</button>
+  </div>
+  <div class="lb-bar">
+    <div id="lb-cap"></div>
+    <div class="meta" id="lb-admin"></div>
+  </div>
+</div>
+
 <script>
 const D=/*__DATA__*/null;
 const $=s=>document.querySelector(s);
+const $$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const linkify=s=>esc(s).replace(/(https?:\/\/[^\s)]+)/g,'<a href="$1">$1</a>');
 const fmt=d=>{if(!d)return"";const [y,m,dd]=d.split("-").map(Number);return new Date(y,m-1,dd).toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric",year:"numeric"})};
-$("#l-folder").href=D.folder;$("#l-img").href=D.imagesFolder;$("#l-vid").href=D.videosFolder;$("#m-img").href=D.imagesFolder;$("#m-vid").href=D.videosFolder;
-const c=D.counts;$("#counts").innerHTML=`<b>What's in the archive</b><br>${c.upcoming} upcoming events, ${c.past} past events, ${c.other} recurring or undated<br>${c.flyers} flyers, ${c.photos} class/lodge photos (of ${c.archivePhotos} images archived), ${c.videos} Masonic videos<br>${c.resources} links, ${c.lodges} lodges in the directory`;
-const card=e=>`<div class="card"><h3>${esc(e.title)}${e.tag?`<span class="tag">${esc(e.tag)}</span>`:""}</h3><div><span class="date">${e.date?fmt(e.date):esc(e.dateText||"Date not known")}</span>${e.time?" &middot; "+esc(e.time):""}</div>${e.location?`<div>${esc(e.location)}</div>`:""}${e.note?`<div>${linkify(e.note)}</div>`:""}<div class="meta">Source: ${esc(e.source)}</div></div>`;
-let mode="upcoming";
-function renderEvents(){const q=$("#q").value.toLowerCase();const L=D.events[mode].filter(e=>(e.title+" "+e.location).toLowerCase().includes(q));
-$("#events").innerHTML=L.map(card).join("")||"<p>Nothing matches.</p>";
-for(const [id,m] of [["b-up","upcoming"],["b-past","past"],["b-other","other"]])$("#"+id).className=mode==m?"on":""}
-$("#b-up").onclick=()=>{mode="upcoming";renderEvents()};$("#b-past").onclick=()=>{mode="past";renderEvents()};$("#b-other").onclick=()=>{mode="other";renderEvents()};$("#q").oninput=renderEvents;renderEvents();
-const today=new Date().toISOString().slice(0,10);let rm="up";
-function renderRookie(){const L=D.rookie.filter(e=>rm=="up"?e.date>=today:e.date<today);$("#rookieList").innerHTML=L.map(card).join("")||"<p>None in this group.</p>";$("#r-up").className=rm=="up"?"on":"";$("#r-past").className=rm=="past"?"on":""}
-$("#r-up").onclick=()=>{rm="up";renderRookie()};$("#r-past").onclick=()=>{rm="past";renderRookie()};renderRookie();
-const item=(t,s,u)=>`<a class="item" href="${esc(u)}"><b>${esc(t)}</b><div class="meta">${esc(s)}</div></a>`;
-$("#flyers").innerHTML=D.flyers.map(f=>item(f.title,fmt(f.date)+" - open in Drive",f.url)).join("");
+const todayISO=(()=>{const t=new Date();return t.getFullYear()+"-"+String(t.getMonth()+1).padStart(2,"0")+"-"+String(t.getDate()).padStart(2,"0")})();
+
+$("#l-folder").href=D.folder;
+$("#m-drive").href=D.folder;
+const c=D.counts;
+$("#counts").innerHTML=`<b>What's in the archive</b><br>${c.upcoming} upcoming events, ${c.past} past events, ${c.other} recurring or undated<br>${c.flyers} flyers, ${c.photos} class/lodge photos (of ${c.archivePhotos} images archived), ${c.videos} Masonic videos — all viewable on this page<br>${c.resources} links, ${c.lodges} lodges in the directory`;
+
+function legendHTML(){
+  return `<span><span class="badge req">R#</span> Required item (deep blue, solid badge)</span>
+          <span><span class="badge alt">A#</span> Alternate item (gold, outlined badge)</span>
+          <span><span class="badge tent-note">R4?</span> Tentative — a conservative match; confirm with the Master or Secretary</span>
+          <span><span class="dot none"></span> Event with no Rookie Award match</span>`;
+}
+$("#legend").innerHTML=legendHTML();
+$("#cal-legend").innerHTML=legendHTML();
+
+function badges(items){
+  if(!items||!items.length)return"";
+  return items.map(it=>{
+    const kind=it.code[0]==="R"?"req":"alt";
+    const q=it.tentative?"?":"";
+    const title=(it.tentative?"Tentative: ":"")+it.code;
+    return `<span class="badge ${kind}${it.tentative?" tent":""}" title="${esc(title)}">${esc(it.code)}${q}</span>`;
+  }).join("");
+}
+function itemLabel(code){
+  const all=[...D.checklist.required,...D.checklist.alternates];
+  const it=all.find(x=>x.code===code);
+  return it?it.code+" — "+it.text:code;
+}
+function card(e){
+  const b=badges(e.rookieItems);
+  return `<div class="card" data-date="${esc(e.date||"")}">
+    <h3>${esc(e.title)}</h3>
+    <div>${b}</div>
+    <div><span class="date">${e.date?fmt(e.date):esc(e.dateText||"Date not known")}</span>${e.time?" &middot; "+esc(e.time):""}</div>
+    ${e.location?`<div>${esc(e.location)}</div>`:""}
+    ${e.note?`<div>${linkify(e.note)}</div>`:""}
+    ${e.rookieItems&&e.rookieItems.length?`<div class="meta">May count toward: ${e.rookieItems.map(it=>esc(itemLabel(it.code))+(it.tentative?" (tentative)":"")).join("; ")}</div>`:""}
+    <div class="meta">Source: ${esc(e.source)}</div>
+  </div>`;
+}
+
+/* ---- calendar: list + month grid ---- */
+let mode="upcoming", view="list";
+let calY, calM; // month is 0-based
+(function initMonth(){
+  const [y,m]=todayISO.split("-").map(Number);
+  calY=y; calM=m-1;
+})();
+function allDated(){return [...D.events.upcoming,...D.events.past].filter(e=>e.date)}
+function renderEvents(){
+  if(view==="cal"){ $("#events").innerHTML=""; return; }
+  const q=$("#q").value.toLowerCase();
+  const L=D.events[mode].filter(e=>(e.title+" "+(e.location||"")).toLowerCase().includes(q));
+  $("#events").innerHTML=L.map(card).join("")||"<p>Nothing matches.</p>";
+  for(const [id,m] of [["b-up","upcoming"],["b-past","past"],["b-other","other"]]) $("#"+id).className=mode==m?"on":"";
+}
+function setView(v){
+  view=v;
+  $("#v-list").className=v==="list"?"on":"";
+  $("#v-cal").className=v==="cal"?"on":"";
+  $("#list-controls").className=v==="list"?"":"hidden";
+  $("#cal-view").className=v==="cal"?"":"hidden";
+  if(v==="cal") renderCal(); else renderEvents();
+}
+$("#v-list").onclick=()=>setView("list");
+$("#v-cal").onclick=()=>setView("cal");
+$("#b-up").onclick=()=>{mode="upcoming";renderEvents()};
+$("#b-past").onclick=()=>{mode="past";renderEvents()};
+$("#b-other").onclick=()=>{mode="other";renderEvents()};
+$("#q").oninput=renderEvents;
+renderEvents();
+
+let selectedDay=todayISO;
+function evKind(e){
+  const items=e.rookieItems||[];
+  if(items.some(i=>i.code[0]==="R")) return "req";
+  if(items.some(i=>i.code[0]==="A")) return "alt";
+  return "none";
+}
+function renderCal(){
+  const label=new Date(calY,calM,1).toLocaleDateString("en-US",{month:"long",year:"numeric"});
+  $("#cal-label").textContent=label;
+  const first=new Date(calY,calM,1);
+  const startDow=(first.getDay()); // 0 Sun
+  const daysIn=new Date(calY,calM+1,0).getDate();
+  const byDay={};
+  for(const e of allDated()){
+    if(!e.date.startsWith(`${calY}-${String(calM+1).padStart(2,"0")}-`)) continue;
+    (byDay[e.date]||(byDay[e.date]=[])).push(e);
+  }
+  const dow=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(d=>`<div class="cal-dow">${d}</div>`).join("");
+  let cells="";
+  for(let i=0;i<startDow;i++) cells+=`<div class="cal-day empty"></div>`;
+  for(let d=1;d<=daysIn;d++){
+    const iso=`${calY}-${String(calM+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+    const evs=byDay[iso]||[];
+    const cls=["cal-day",iso===todayISO?"today":"",iso===selectedDay?"selected":""].filter(Boolean).join(" ");
+    const evHtml=evs.map(e=>`<span class="cal-ev ${e.rookieItems&&e.rookieItems.length? (evKind(e)==="req"?"has-req":"has-alt"):""}">${badges(e.rookieItems)}${esc(e.title)}</span>`).join("");
+    const dots=evs.map(e=>`<span class="dot ${evKind(e)}" title="${esc(e.title)}"></span>`).join("");
+    cells+=`<button type="button" class="${cls}" data-day="${iso}" aria-label="${esc(fmt(iso))}${evs.length?", "+evs.length+" events":""}"><span class="n">${d}</span>${evHtml}<span class="cal-dots">${dots}</span></button>`;
+  }
+  $("#cal-grid").innerHTML=dow+cells;
+  $$("#cal-grid .cal-day[data-day]").forEach(el=>el.onclick=()=>{selectedDay=el.dataset.day;renderCal();});
+  const list=byDay[selectedDay]||[];
+  $("#cal-day-list").innerHTML=`<h3>${esc(fmt(selectedDay))}</h3>`+(list.length?list.map(card).join(""):"<p class='meta'>No events on this day.</p>");
+}
+$("#cal-prev").onclick=()=>{calM--; if(calM<0){calM=11;calY--;} selectedDay=`${calY}-${String(calM+1).padStart(2,"0")}-01`; renderCal();};
+$("#cal-next").onclick=()=>{calM++; if(calM>11){calM=0;calY++;} selectedDay=`${calY}-${String(calM+1).padStart(2,"0")}-01`; renderCal();};
+
+/* ---- rookie checklist + localStorage tracker ---- */
+const CK=D.checklist;
+const STORE="h9-rookie-tracker-v2";
+$("#rule").textContent=CK.rule;
+$("#signoff").innerHTML="<b>Sign-off:</b> "+esc(CK.signoff);
+$("#submit-note").textContent=CK.submit;
+if(CK.formImage){
+  $("#form-link").innerHTML=`<a href="${esc(CK.formImage)}" target="_blank" rel="noopener">Official form</a> (cleaned copy of the Grand Lodge checkoff list).`;
+}else{
+  $("#form-link").innerHTML="The official paper form is signed by the Lodge Master and Lodge Secretary.";
+}
+function loadTrk(){try{return JSON.parse(localStorage.getItem(STORE)||"{}")}catch(ex){return {}}}
+function saveTrk(t){localStorage.setItem(STORE,JSON.stringify(t))}
+function trkOf(code){const t=loadTrk()[code]||{}; return {done:!!t.done, date:t.date||""}}
+function setTrk(code, patch){
+  const all=loadTrk();
+  all[code]={...trkOf(code),...patch};
+  if(!all[code].done) all[code].date=all[code].date||"";
+  saveTrk(all);
+  renderChecklist();
+}
+function matchesFor(code){
+  const up=D.events.upcoming.filter(e=>(e.rookieItems||[]).some(i=>i.code===code));
+  const past=D.events.past.filter(e=>(e.rookieItems||[]).some(i=>i.code===code));
+  return {up, past};
+}
+function renderItem(it, openCode){
+  const st=trkOf(it.code);
+  const kind=it.code[0]==="R"?"req":"alt";
+  const {up,past}=matchesFor(it.code);
+  const open=openCode===it.code;
+  const matchId="m-"+it.code;
+  let match="";
+  if(open){
+    if(up.length||past.length){
+      match=`<div class="match-box" id="${matchId}"><b>Upcoming events that may count</b>${up.length?up.map(card).join(""):"<p>None upcoming in the archive.</p>"}
+        ${past.length?`<details><summary>Past events that may have counted (${past.length})</summary>${past.map(card).join("")}</details>`:""}</div>`;
+    }else{
+      match=`<div class="match-box" id="${matchId}"><p>No events in the archive are tagged for ${esc(it.code)} yet. Many items (sponsoring a candidate, flower delivery, investigation team, lodge-room setup) happen off the calendar — record them here when you do them, and have the Master and Secretary sign the official form.</p></div>`;
+    }
+  }
+  return `<div class="card check-item${st.done?" done":""}" data-code="${it.code}">
+    <input type="checkbox" id="cb-${it.code}" ${st.done?"checked":""} aria-label="Mark ${it.code} done">
+    <div>
+      <h3><span class="badge ${kind}">${esc(it.code)}</span> ${esc(it.text)}</h3>
+      <div class="no-print"><button type="button" class="show-match" data-code="${it.code}">${open?"Hide matching events":"Show matching events"}</button></div>
+      ${match}
+    </div>
+    <label class="meta">Date <input type="date" data-code="${it.code}" value="${esc(st.date)}"></label>
+  </div>`;
+}
+let openMatch="";
+function renderChecklist(){
+  const req=CK.required, alt=CK.alternates;
+  const reqDone=req.filter(i=>trkOf(i.code).done).length;
+  const altDone=alt.filter(i=>trkOf(i.code).done).length;
+  const reqMet=reqDone>= (CK.requiredNeed||6);
+  const altMet=altDone>= (CK.alternatesNeed||5);
+  $("#progress").innerHTML=`<span class="pills${reqMet?" met":""}">Required ${reqDone}/6</span>
+    <span class="pills${altMet?" met":""}">Alternates ${altDone}/5 of 11</span>
+    <span class="meta">${reqMet&&altMet?"This tracker thinks you have met the rule. The official form still needs the Master and Secretary to sign.":"Need all 6 required and any 5 alternates."}</span>`;
+  $("#req-list").innerHTML=req.map(i=>renderItem(i,openMatch)).join("");
+  $("#alt-list").innerHTML=alt.map(i=>renderItem(i,openMatch)).join("");
+  $$("#rookie input[type=checkbox]").forEach(cb=>{
+    cb.onchange=()=>{
+      const code=cb.id.replace("cb-","");
+      const patch={done:cb.checked};
+      if(cb.checked && !trkOf(code).date) patch.date=todayISO;
+      setTrk(code, patch);
+    };
+  });
+  $$("#rookie input[type=date]").forEach(inp=>{
+    inp.onchange=()=>setTrk(inp.dataset.code,{date:inp.value, done:trkOf(inp.dataset.code).done||!!inp.value});
+  });
+  $$("#rookie .show-match").forEach(btn=>{
+    btn.onclick=()=>{ openMatch=openMatch===btn.dataset.code?"":btn.dataset.code; renderChecklist();
+      if(openMatch){ const el=$("#m-"+openMatch); if(el) el.scrollIntoView({behavior:"smooth",block:"nearest"}); }
+    };
+  });
+}
+renderChecklist();
+$("#print-check").onclick=()=>window.print();
+$("#reset-check").onclick=()=>{
+  if(confirm("Clear the checkboxes and dates saved in this browser? This does not change the official form.")){
+    localStorage.removeItem(STORE); openMatch=""; renderChecklist();
+  }
+};
+
+/* ---- photos / lightbox (tap + swipe) ---- */
+const gallery=[];
+function thumbEl(item, gi){
+  const src=item.thumb||item.src||"";
+  const title=item.title||("Photo");
+  return `<button type="button" class="thumb" data-gi="${gi}">
+    ${src?`<img src="${esc(src)}" alt="${esc(title)}" loading="lazy">`:`<span class="thumb-ph"></span>`}
+    <div class="cap"><b>${esc(title)}</b><div class="meta">${item.date?fmt(item.date):""}</div></div>
+  </button>`;
+}
+D.flyers.forEach(f=>{ gallery.push({src:f.src,thumb:f.thumb,title:f.title,date:f.date}); });
 const groups=[...new Set(D.photos.map(p=>p.group))];
-$("#photos").innerHTML=groups.map(g=>`<h4>${esc(g)}</h4><div class="grid">${D.photos.filter(p=>p.group==g).map((p,i)=>item("Photo "+(i+1),fmt(p.date),p.url)).join("")}</div>`).join("");
-$("#videos").innerHTML=D.videos.map(v=>item(v.title,fmt(v.date)+" - open in Drive",v.url)).join("");
-$("#docs").innerHTML=D.docs.map(d=>item(d.title,"Open in Drive",d.url)).join("");
-$("#res").innerHTML=D.resources.map(r=>item(r.title,r.note,r.url)).join("");
-$("#reading").innerHTML=D.reading.map(r=>item(r.title,r.note,r.url)).join("");
+$("#flyers").innerHTML=D.flyers.map((f,i)=>thumbEl(f,i)).join("");
+$("#photos").innerHTML=groups.map(g=>{
+  const items=D.photos.filter(p=>p.group===g);
+  const html=items.map((p,i)=>{
+    const gi=gallery.length;
+    gallery.push({src:p.src,thumb:p.thumb,title:g+" — photo "+(i+1),date:p.date});
+    return thumbEl({...p,title:"Photo "+(i+1)}, gi);
+  }).join("");
+  return `<h4>${esc(g)}</h4><div class="grid">${html}</div>`;
+}).join("");
+
+let gi=0, sx=0;
+function showLb(i){
+  if(!gallery.length)return;
+  gi=(i+gallery.length)%gallery.length;
+  const it=gallery[gi];
+  $("#lb-img").src=it.src||it.thumb||"";
+  $("#lb-img").alt=it.title||"";
+  $("#lb-cap").innerHTML=`<b>${esc(it.title)}</b> · ${it.date?fmt(it.date):""} · ${gi+1} of ${gallery.length}`;
+  $("#lb-admin").innerHTML=`Admins: <a href="${esc(D.folder)}" target="_blank" rel="noopener">download full-quality originals from the Google Drive archive</a>`;
+  $("#lb").className="on";
+  document.body.style.overflow="hidden";
+}
+function hideLb(){ $("#lb").className=""; document.body.style.overflow=""; $("#lb-img").src=""; }
+$$(".thumb").forEach(el=>el.onclick=()=>showLb(+el.dataset.gi));
+$("#lb-close").onclick=hideLb;
+$("#lb-prev").onclick=()=>showLb(gi-1);
+$("#lb-next").onclick=()=>showLb(gi+1);
+$("#lb").addEventListener("click",e=>{ if(e.target===$("#lb")||e.target===$("#lb-stage")) hideLb(); });
+document.addEventListener("keydown",e=>{
+  if($("#lb").className!=="on")return;
+  if(e.key==="Escape")hideLb();
+  if(e.key==="ArrowLeft")showLb(gi-1);
+  if(e.key==="ArrowRight")showLb(gi+1);
+});
+$("#lb-stage").addEventListener("touchstart",e=>{sx=e.changedTouches[0].clientX;},{passive:true});
+$("#lb-stage").addEventListener("touchend",e=>{
+  const dx=e.changedTouches[0].clientX-sx;
+  if(Math.abs(dx)>40){ dx<0?showLb(gi+1):showLb(gi-1); }
+},{passive:true});
+
+/* ---- videos ---- */
+$("#videos").innerHTML=D.videos.map(v=>{
+  const srcLink=v.sourceUrl?` · <a href="${esc(v.sourceUrl)}" target="_blank" rel="noopener">Original post</a>`:"";
+  const media=v.src?`<video controls playsinline webkit-playsinline preload="none" poster="${esc(v.poster||"")}" src="${esc(v.src)}"></video>`:`<p class="meta">Video file not hosted yet.</p>`;
+  return `<figure class="vid">${media}<figcaption><b>${esc(v.title)}</b><div class="meta">${v.date?fmt(v.date):""}${srcLink}</div></figcaption></figure>`;
+}).join("")||"<p>No videos.</p>";
+$$("#videos video").forEach(v=>{
+  v.addEventListener("play",()=>{ $$("#videos video").forEach(o=>{ if(o!==v)o.pause(); }); });
+});
+
+const docItem=(t,s,u)=>`<a class="item" href="${esc(u)}" style="padding:12px"><b>${esc(t)}</b><div class="meta">${esc(s)}</div></a>`;
+$("#docs").innerHTML=D.docs.map(d=>docItem(d.title,"Open in Drive",d.url)).join("");
+$("#res").innerHTML=D.resources.map(r=>docItem(r.title,r.note,r.url)).join("");
+$("#reading").innerHTML=D.reading.map(r=>docItem(r.title,r.note,r.url)).join("");
 $("#ltable").innerHTML="<tr><th>Lodge</th><th>No.</th><th>Address</th><th>Meets</th><th>Open</th><th>Dark</th><th>Status</th></tr>"+D.lodges.map(l=>`<tr><td>${l.website?`<a href="${esc(l.website)}">${esc(l.name)}</a>`:esc(l.name)}</td><td>${esc(l.no)}</td><td>${esc(l.address)}</td><td>${esc(l.meets)}</td><td>${esc(l.open)}</td><td>${esc(l.dark)}</td><td>${esc(l.status.replace(/_/g," "))}</td></tr>`).join("");
+
+if(D.formUrl){
+  $("#signup").classList.remove("hidden");
+  $("#nav-signup").classList.remove("hidden");
+  $("#signup-btn").href=D.formUrl;
+}
+
 $("#fb").onclick=()=>{const body="What page or section:\n\nWhat's confusing or missing:\n\nWhat would help:\n\nYour first name (optional):\n";location.href="mailto:gregg.oberg39@gmail.com?subject="+encodeURIComponent("Rookie Guide feedback")+"&body="+encodeURIComponent(body)};
-$("#foot").textContent="Built "+D.built+" from the Harmony #9 archive. Unofficial; not an official Grand Lodge publication.";
+$("#foot").textContent="v"+D.version+" · Built "+D.built+" from the Harmony #9 archive. Unofficial; not an official Grand Lodge publication.";
 </script></body></html>

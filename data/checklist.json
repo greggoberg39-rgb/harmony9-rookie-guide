@@ -1,0 +1,81 @@
+{
+ "rule": "ALL 6 Required plus ANY 5 of 11 Alternates.",
+ "signoff": "The Lodge Master and the Lodge Secretary sign off, with dates. This on-site tracker is only a personal aid; it is not a substitute for the official signed form.",
+ "submit": "Submit the completed form with a cover letter saying why the candidate is worthy to The Grand Master's Office, 222 Taunton Avenue, East Providence, RI 02914-4556.",
+ "requiredNeed": 6,
+ "alternatesNeed": 5,
+ "required": [
+  {
+   "code": "R1",
+   "text": "Attend each of the blue lodge degrees at least once, but at other lodge."
+  },
+  {
+   "code": "R2",
+   "text": "Attend at least one visit of the lodge's D.D.G.M. to another lodge in one of the Districts."
+  },
+  {
+   "code": "R3",
+   "text": "Attend at least seven stated lodge communications over the course of 18 months."
+  },
+  {
+   "code": "R4",
+   "text": "Work on at least one lodge social activity or lodge charitable event."
+  },
+  {
+   "code": "R5",
+   "text": "Assist at least once with the officers setting up the lodge room (at a meeting or rehearsal)."
+  },
+  {
+   "code": "R6",
+   "text": "Attend a Grand Lodge sponsored educational program."
+  }
+ ],
+ "alternates": [
+  {
+   "code": "A1",
+   "text": "Sponsor at least one candidate into the lodge."
+  },
+  {
+   "code": "A2",
+   "text": "Assist at least once with the preparation of candidate(s) before the degree, or assist in a cipher training for another candidate."
+  },
+  {
+   "code": "A3",
+   "text": "Assist in serving/preparation/setup/cleanup of a lodge dinner meeting or breakfast."
+  },
+  {
+   "code": "A4",
+   "text": "Assist in serving at a Table Lodge within Rhode Island."
+  },
+  {
+   "code": "A5",
+   "text": "Attend a Masonic Memorial Service."
+  },
+  {
+   "code": "A6",
+   "text": "Assist in a lodge Open House or Membership drive event."
+  },
+  {
+   "code": "A7",
+   "text": "Assist in a CHIP Program event or a Blood Drive within a district."
+  },
+  {
+   "code": "A8",
+   "text": "Attend a DeMolay or Rainbow meeting, event, or installation."
+  },
+  {
+   "code": "A9",
+   "text": "Visit a lodge member in a nursing home, hospital or home (who can't get to meetings)."
+  },
+  {
+   "code": "A10",
+   "text": "Assist in the delivery of flowers to a Special Lady."
+  },
+  {
+   "code": "A11",
+   "text": "Accompany an investigation team of a petitioner."
+  }
+ ],
+ "formImage": "",
+ "formUrl": ""
+}

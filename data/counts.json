@@ -7,5 +7,9 @@
  "videos": 31,
  "archivePhotos": 157,
  "resources": 19,
- "lodges": 33
+ "lodges": 33,
+ "hostedImages": 53,
+ "hostedVideos": 31,
+ "hostedImageMB": 10.37,
+ "hostedVideoMB": 215.13
 }
