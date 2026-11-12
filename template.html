@@ -419,6 +419,13 @@ function thumbEl(item, gi){
   </button>`;
 }
 D.flyers.forEach(f=>{ gallery.push({src:f.src,thumb:f.thumb,title:f.title,date:f.date}); });
+function vidFig(v){
+  const srcLink=v.sourceUrl?` · <a href="${esc(v.sourceUrl)}" target="_blank" rel="noopener">Original post</a>`:"";
+  const media=v.src?`<video controls playsinline webkit-playsinline preload="none" poster="${esc(v.poster||"")}" src="${esc(v.src)}"></video>`:`<p class="meta">Video file not hosted yet.</p>`;
+  return `<figure class="vid">${media}<figcaption><b>${esc(v.title)}</b><div class="meta">${v.date?fmt(v.date):""}${srcLink}</div></figcaption></figure>`;
+}
+const videosByGroup={};
+D.videos.forEach(v=>{ if(v.group){ (videosByGroup[v.group]||=[]).push(v); } });
 const groups=[...new Set(D.photos.map(p=>p.group))];
 $("#flyers").innerHTML=D.flyers.map((f,i)=>thumbEl(f,i)).join("");
 $("#photos").innerHTML=groups.map(g=>{
@@ -428,7 +435,8 @@ $("#photos").innerHTML=groups.map(g=>{
     gallery.push({src:p.src,thumb:p.thumb,title:g+" — photo "+(i+1),date:p.date});
     return thumbEl({...p,title:"Photo "+(i+1)}, gi);
   }).join("");
-  return `<h4>${esc(g)}</h4><div class="grid">${html}</div>`;
+  const vids=(videosByGroup[g]||[]).map(vidFig).join("");
+  return `<h4>${esc(g)}</h4><div class="grid">${html}</div>${vids?`<div class="vidgrid" style="margin-top:12px">${vids}</div>`:""}`;
 }).join("");
 
 let gi=0, sx=0;
@@ -462,13 +470,9 @@ $("#lb-stage").addEventListener("touchend",e=>{
 },{passive:true});
 
 /* ---- videos ---- */
-$("#videos").innerHTML=D.videos.map(v=>{
-  const srcLink=v.sourceUrl?` · <a href="${esc(v.sourceUrl)}" target="_blank" rel="noopener">Original post</a>`:"";
-  const media=v.src?`<video controls playsinline webkit-playsinline preload="none" poster="${esc(v.poster||"")}" src="${esc(v.src)}"></video>`:`<p class="meta">Video file not hosted yet.</p>`;
-  return `<figure class="vid">${media}<figcaption><b>${esc(v.title)}</b><div class="meta">${v.date?fmt(v.date):""}${srcLink}</div></figcaption></figure>`;
-}).join("")||"<p>No videos.</p>";
-$$("#videos video").forEach(v=>{
-  v.addEventListener("play",()=>{ $$("#videos video").forEach(o=>{ if(o!==v)o.pause(); }); });
+$("#videos").innerHTML=D.videos.filter(v=>!v.group).map(vidFig).join("")||"<p>No videos.</p>";
+$$("video").forEach(v=>{
+  v.addEventListener("play",()=>{ $$("video").forEach(o=>{ if(o!==v)o.pause(); }); });
 });
 
 const docItem=(t,s,u)=>`<a class="item" href="${esc(u)}" style="padding:12px"><b>${esc(t)}</b><div class="meta">${esc(s)}</div></a>`;

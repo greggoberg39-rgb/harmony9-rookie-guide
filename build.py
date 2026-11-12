@@ -136,8 +136,10 @@ def process_image(src, stem):
 
 def video_slug(fn):
     base = fn[:-4] if fn.endswith(".mp4") else fn
-    if "whatsapp-video" in fn:
-        return base[:10] + "_class-ring-progress"
+    if fn == "2026-11-06_JacobDaali_whatsapp-video.mp4":
+        return "2026-11-06_class-ring-progress"
+    if fn == "2026-11-12_You_whatsapp-video.mp4":
+        return "2026-11-12_initiation"
     parts = base.split("_", 2)
     if len(parts) == 3 and re.match(r"^[A-Z]", parts[1]):
         return parts[0] + "_" + parts[2]
@@ -651,7 +653,12 @@ FLYERS = {  # filename-prefix -> label (hand-reviewed event flyers / lodge graph
  "2026-08-15_135126": "Harmony No. 9 Class of 2026 graphic (second version)", "2026-08-26_111643": "Harmony Lodge #9, Cranston",
  "2026-09-02_141535": "Grand Lodge Youth Committee, Trunk or Treat request", "2026-09-20_131005": "Trunk or Treat flyer, Oct 3",
  "2026-10-10_145835": "Harmony Texas Hold'em fundraiser for Toys for Tots"}
+INIT_STEMS = [f"2026-11-12_1829_{i:02d}" for i in range(1, 19)] + [f"2026-11-12_1830_{i:02d}" for i in range(19, 69)]
+PHOTO_GROUP_DATE = {
+    "Initiation in semi-public session, Nov 7, 2026": "2026-11-07",
+}
 PHOTOS = {  # hand-reviewed Masonic / lodge / class photos (personal photos, selfies, family, cars, memes left out)
+ "Initiation in semi-public session, Nov 7, 2026": INIT_STEMS,
  "Class and lodge groups": ["2026-04-08_211643","2026-04-18_213249","2026-05-02_160405","2026-05-02_160446","2026-05-02_160511","2026-05-04_183134","2026-07-04_123247","2026-08-16_160734","2026-08-16_171816","2026-09-04_101729"],
  "Pins, coins and class rings": ["2026-05-04_205238","2026-05-04_205326","2026-06-10_165532","2026-07-23_164108","2026-07-23_164134","2026-07-23_164530","2026-07-25_233216","2026-10-08_105936","2026-10-08_105936_2","2026-10-08_105937","2026-10-13_103214","2026-10-13_103215","2026-10-13_103215_2","2026-11-06_112417","2026-11-06_112417_2","2026-11-06_112417_3","2026-11-06_112417_4","2026-11-06_112417_5"],
  "Trunk or Treat (Oct 3)": ["2026-09-02_182231","2026-10-02_135459","2026-10-02_211751","2026-10-03_091752","2026-10-03_125626","2026-10-03_162254"]}
@@ -679,7 +686,7 @@ for grp, names in PHOTOS.items():
             continue
         status, full, thumb = process_image(src, n)
         img_stats[status if status in img_stats else "failed"] = img_stats.get(status, 0) + 1
-        rec = {"date": n[:10], "group": grp, "id": img_id[fn]}
+        rec = {"date": PHOTO_GROUP_DATE.get(grp, n[:10]), "group": grp, "id": img_id[fn]}
         if full:
             rec["src"] = "media/img/" + n + ".jpg"
             rec["thumb"] = "media/img/thumbs/" + n + ".jpg"
@@ -693,8 +700,10 @@ for l in rd("links.csv"):
         vids_ok[os.path.basename(l["local_file"])] = l
 
 def video_title(fn, link):
-    if "whatsapp-video" in fn:
+    if fn == "2026-11-06_JacobDaali_whatsapp-video.mp4":
         return "Class ring progress clip"
+    if fn == "2026-11-12_You_whatsapp-video.mp4":
+        return "Initiation in semi-public session, Nov 7, 2026"
     parts = fn[:-4].split("_", 2)
     channel = parts[2].replace("-", " ") if len(parts) > 2 else fn
     preview = (link or {}).get("title_or_preview", "")
@@ -712,7 +721,7 @@ def clean_source_url(u):
     if not u: return ""
     return re.sub(r"\?(fbclid|is)=.*$", "", u)
 
-SPECIAL_VIDS = {"2026-11-06_JacobDaali_whatsapp-video.mp4"}
+SPECIAL_VIDS = {"2026-11-06_JacobDaali_whatsapp-video.mp4", "2026-11-12_You_whatsapp-video.mp4"}
 left_out_videos = []
 vid_stats = {"wrote": 0, "skipped": 0, "failed": 0}
 videos = []
@@ -734,6 +743,9 @@ for fn, did in tsv("drive_ids.tsv"):
     link = vids_ok.get(fn, {})
     parts = fn[:-4].split("_", 2)
     rec = {"date": parts[0], "title": video_title(fn, link), "id": did, "slug": slug}
+    if fn == "2026-11-12_You_whatsapp-video.mp4":
+        rec["date"] = "2026-11-07"
+        rec["group"] = "Initiation in semi-public session, Nov 7, 2026"
     src_url = clean_source_url(link.get("url", ""))
     if src_url:
         rec["sourceUrl"] = src_url
@@ -769,13 +781,16 @@ for l in rd("links.csv"):
         resources.append({"title": t.split(" | ")[0][:80] or u, "url": u, "note": "Shared in the class chat, " + l["message_date"]})
 reading = []
 for l in rd("links.csv"):
-    if l["masonic"] == "yes" and l["type"] == "facebook_post" and l["url"] not in seen:
+    if l["masonic"] != "yes" or l["url"] in seen:
+        continue
+    if l["type"] == "facebook_post" or (l["type"] in ("facebook_reel", "facebook_video") and not l.get("local_file")):
         t = l["title_or_preview"]
         if re.search(r"middle chamber|stevenmason", t, re.I): continue
         name = t.split(" | ")[0].strip()[:60]
         if name.startswith("YOU ARE CORDIALLY"): name = "Ceremony of Constitution invitation"
         if name and not name.startswith("Visit Facebook"):
-            reading.append({"title": name, "url": l["url"], "note": "Facebook post shared " + l["message_date"]})
+            kind = "reel" if "reel" in l["type"] else ("video" if "video" in l["type"] else "post")
+            reading.append({"title": name, "url": l["url"], "note": f"Facebook {kind} shared " + l["message_date"]})
 
 def dir_size(path):
     total = 0
