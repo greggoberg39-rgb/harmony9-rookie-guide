@@ -3,11 +3,16 @@
 A static, single-page guide (no server, no accounts) built from the local Harmony #9 archive.
 Hosted on GitHub Pages: https://greggoberg39-rgb.github.io/harmony9-rookie-guide/
 
-**Current version: v2.1.2**
+**Current version: v2.2.0**
 
-The page includes the official RI Grand Lodge Master Mason Rookie Award checklist (with a personal tracker saved only in the browser), a calendar in both list and month-grid views, flyers/photos/videos hosted on the site so they work on an iPhone without downloading from Google Drive, resources, an RI lodge directory, a Blog section (currently one post about this project), and a "suggest an improvement" email link.
+The page includes the official RI Grand Lodge Master Mason Rookie Award checklist (with a personal tracker saved only in the browser), a calendar in both list and month-grid views, flyers/photos/videos hosted on the site so they work on an iPhone without downloading from Google Drive, resources, an RI lodge directory, a Blog section (currently one post about this project), a Pirate Lodge Log section (currently one post on the pirate-and-Mason founding legend), and a "suggest an improvement" email link.
 
 ## Changelog
+
+### v2.2.0 (2026-11-15)
+- Adds a separate **The Pirate Lodge Log** section at `/pirates/`, mirroring the Blog tab (same nav style, index cards, post template, and mobile-friendly layout). It has its own on/off switch, `PIRATES_MODE`, in `build.py` (`"live"`, `"coming_soon"`, or `"off"`), and source files in `pirates/posts/` are never deleted by the build.
+- Publishes one original post, “The Legend of the Pirate Lodge” (byline Gregg Oberg & Grok, dated November 15, 2026), framed as the founding legend of a pirate lodge. A visible caveat notes that it was written by Grok at Gregg's request and that Gregg has not yet read or edited it. A “Fact or legend?” box marks documented history, analogies, anecdotes, and unsupported claims. No ritual or study material is included.
+- Existing Blog posts and their `published` flags are unchanged (one live AI post; the earlier RIMBA posts remain unpublished).
 
 ### v2.1.2 (2026-11-12)
 - Publishes one original post, “What One Volunteer and an AI Built in 22 Days” (byline Gregg Oberg & Grok), with a visible caveat that it was written by Grok at Gregg's request and that Gregg has not yet read or edited it. The three effort charts are hosted under `blog/media/`.
@@ -45,13 +50,15 @@ The page includes the official RI Grand Lodge Master Mason Rookie Award checklis
 - `blog/posts/*.md` - blog posts (front matter + HTML body). `build.py` writes `blog/index.html` and `blog/<slug>.html` for posts with `published` other than `false` when `BLOG_MODE` is `"live"`. When `BLOG_MODE` is `"coming_soon"`, it writes only the Coming soon `blog/index.html`.
 - `blog/_index.html`, `blog/_post.html`, `blog/_coming_soon.html`, `blog/_shared.css` - blog templates.
 - `blog/media/` - images used in blog posts.
+- `pirates/posts/*.md` - Pirate Lodge Log posts, rendered the same way under `pirates/` when `PIRATES_MODE` is `"live"`.
+- `pirates/_index.html`, `pirates/_post.html`, `pirates/_coming_soon.html`, `pirates/_shared.css` - Pirate Lodge Log templates.
 
 ## Rebuild
 ```
 python3 build.py                      # reads /workspace/harmony-archive
 python3 build.py /path/to/archive     # or another copy
 ```
-Needs Python 3, Pillow (for images), and ffmpeg (for videos). Already-processed media is skipped, so a weekly run can just execute `build.py`, then commit and push. When `BLOG_MODE` is `"live"`, blog pages are rebuilt from `blog/posts/*.md` in the same run; no extra tools are required. Set `BLOG_MODE = "coming_soon"` for a Coming soon page (nav link stays), or `"off"` to skip generating blog pages and hide the nav link. To restore published posts, set `BLOG_MODE = "live"`, rebuild, commit and push.
+Needs Python 3, Pillow (for images), and ffmpeg (for videos). Already-processed media is skipped, so a weekly run can just execute `build.py`, then commit and push. When `BLOG_MODE` is `"live"`, blog pages are rebuilt from `blog/posts/*.md` in the same run; no extra tools are required. Set `BLOG_MODE = "coming_soon"` for a Coming soon page (nav link stays), or `"off"` to skip generating blog pages and hide the nav link. To restore published posts, set `BLOG_MODE = "live"`, rebuild, commit and push. `PIRATES_MODE` works the same way for the Pirate Lodge Log section under `pirates/`.
 
 Inputs: `events.csv`, `ri_lodges.csv`, `links.csv`, `media.csv`, `image_ids.tsv`, `drive_ids.tsv`, `image_text.csv`, plus files under `images/` and `video/`.
 

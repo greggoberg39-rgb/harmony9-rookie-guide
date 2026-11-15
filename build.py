@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rebuild the Rookie Award Guide (v2.1.2) data + index.html from the local archive.
+"""Rebuild the Rookie Award Guide (v2.2.0) data + index.html from the local archive.
 
 Usage:  python3 build.py [/path/to/harmony-archive]
 Reads events.csv, ri_lodges.csv, links.csv, media.csv, image_ids.tsv, drive_ids.tsv, image_text.csv
@@ -15,7 +15,7 @@ import csv, json, re, sys, os, datetime, subprocess, hashlib, shutil
 ARCH = sys.argv[1] if len(sys.argv) > 1 else "/workspace/harmony-archive"
 HERE = os.path.dirname(os.path.abspath(__file__))
 TODAY = datetime.date.today().isoformat()
-VERSION = "2.1.2"
+VERSION = "2.2.0"
 FOLDER = "https://drive.google.com/drive/folders/1OwSPqYeJlTW7ZvceGOezPnjsX4wDboHd"
 IMAGES = "https://drive.google.com/drive/folders/19peixug8n3EthSHKtXh0Th1JSoQ_JEkT"
 VIDEOS = "https://drive.google.com/drive/folders/1uzXTYt5i8P-8o8M0AxtjK_5akMaAP0qE"
@@ -28,6 +28,11 @@ FORM_URL = ""
 #   "off"         - hide the Blog nav link and skip generating blog pages
 BLOG_MODE = "live"
 BLOG_ENABLED = BLOG_MODE != "off"
+# Pirate Lodge Log publishing mode. Source files in pirates/posts/ are never deleted.
+#   "live" / "coming_soon" / "off" work the same way as BLOG_MODE.
+PIRATES_MODE = "live"
+PIRATES_ENABLED = PIRATES_MODE != "off"
+PIRATES_NAV_LABEL = "The Pirate Lodge Log"
 view = lambda i: f"https://drive.google.com/file/d/{i}/view"
 rd = lambda f: list(csv.DictReader(open(os.path.join(ARCH, f), encoding="utf-8")))
 tsv = lambda f: [l.rstrip("\n").split("\t") for l in open(os.path.join(ARCH, f), encoding="utf-8") if l.strip()]
@@ -304,26 +309,43 @@ def fmt_long(d):
 def html_esc(s):
     return (s or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
 
-def build_blog():
-    """Render blog pages according to BLOG_MODE. Source posts in blog/posts/ are never deleted."""
-    blog_dir = os.path.join(HERE, "blog")
-    posts_dir = os.path.join(blog_dir, "posts")
-    if os.path.isdir(blog_dir):
-        for fn in os.listdir(blog_dir):
+def is_published_post(post):
+    v = str(post.get("published") or "true").strip().lower()
+    return v not in ("false", "no", "0", "off")
+
+def section_nav_html(enabled, href, label):
+    if not enabled:
+        return ""
+    return f'<a href="{html_esc(href)}">{html_esc(label)}</a>'
+
+def apply_section_nav(page):
+    """Fill cross-section nav placeholders used by blog and pirates templates."""
+    pirates_link = section_nav_html(PIRATES_ENABLED, "../pirates/", PIRATES_NAV_LABEL)
+    blog_link = section_nav_html(BLOG_ENABLED, "../blog/", "Blog")
+    return (page
+        .replace("<!--__NAV_PIRATES__-->", pirates_link)
+        .replace("<!--__NAV_BLOG__-->", blog_link))
+
+def build_posts_section(rel_dir, mode, default_tagline, default_intro, sourced_tagline=None, sourced_intro=None):
+    """Render a markdown posts section. Source files in <rel_dir>/posts/ are never deleted."""
+    sect_dir = os.path.join(HERE, rel_dir)
+    posts_dir = os.path.join(sect_dir, "posts")
+    if os.path.isdir(sect_dir):
+        for fn in os.listdir(sect_dir):
             if fn.endswith(".html") and not fn.startswith("_"):
-                os.remove(os.path.join(blog_dir, fn))
-    if BLOG_MODE == "off" or not os.path.isdir(blog_dir):
+                os.remove(os.path.join(sect_dir, fn))
+    if mode == "off" or not os.path.isdir(sect_dir):
         return []
-    css_path = os.path.join(blog_dir, "_shared.css")
+    css_path = os.path.join(sect_dir, "_shared.css")
     css = open(css_path, encoding="utf-8").read() if os.path.isfile(css_path) else ""
-    if BLOG_MODE == "coming_soon":
-        tpl_path = os.path.join(blog_dir, "_coming_soon.html")
+    if mode == "coming_soon":
+        tpl_path = os.path.join(sect_dir, "_coming_soon.html")
         tpl = open(tpl_path, encoding="utf-8").read()
-        page = (tpl
+        page = apply_section_nav(tpl
             .replace("/*__CSS__*/", css)
             .replace("/*__VERSION__*/", VERSION)
             .replace("/*__BUILT__*/", TODAY))
-        open(os.path.join(blog_dir, "index.html"), "w", encoding="utf-8").write(page)
+        open(os.path.join(sect_dir, "index.html"), "w", encoding="utf-8").write(page)
         return []
     if not os.path.isdir(posts_dir):
         return []
@@ -332,20 +354,17 @@ def build_blog():
         if not fn.endswith(".md"):
             continue
         posts.append(parse_post(open(os.path.join(posts_dir, fn), encoding="utf-8").read()))
-    def is_published(post):
-        v = str(post.get("published") or "true").strip().lower()
-        return v not in ("false", "no", "0", "off")
-    posts = [post for post in posts if is_published(post)]
+    posts = [post for post in posts if is_published_post(post)]
     posts.sort(key=lambda p: (p.get("date") or "", p.get("title") or ""), reverse=True)
-    css = open(os.path.join(blog_dir, "_shared.css"), encoding="utf-8").read()
-    idx_tpl = open(os.path.join(blog_dir, "_index.html"), encoding="utf-8").read()
-    post_tpl = open(os.path.join(blog_dir, "_post.html"), encoding="utf-8").read()
-    if any((post.get("source") or "").strip() for post in posts):
-        tagline = "Blog — posts by Ben Giumarra and Gregg Oberg, republished with permission."
-        intro = "These pieces were written by Ben Giumarra and Gregg Oberg and are republished here with permission. Each post names its author and links back to where it first appeared."
+    css = open(os.path.join(sect_dir, "_shared.css"), encoding="utf-8").read()
+    idx_tpl = open(os.path.join(sect_dir, "_index.html"), encoding="utf-8").read()
+    post_tpl = open(os.path.join(sect_dir, "_post.html"), encoding="utf-8").read()
+    if any((post.get("source") or "").strip() for post in posts) and sourced_tagline:
+        tagline = sourced_tagline
+        intro = sourced_intro or default_intro
     else:
-        tagline = "Harmony Lodge No. 9, Cranston, Rhode Island."
-        intro = "Notes from the work at Harmony Lodge No. 9."
+        tagline = default_tagline
+        intro = default_intro
     cards = []
     for p in posts:
         slug = p.get("slug") or re.sub(r"[^a-z0-9]+", "-", (p.get("title") or "").lower()).strip("-")
@@ -372,7 +391,7 @@ def build_blog():
             credit_html = f'<p class="credit">{html_esc(note)}</p>'
         else:
             credit_html = ""
-        page = (post_tpl
+        page = apply_section_nav(post_tpl
             .replace("/*__CSS__*/", css)
             .replace("/*__TITLE__*/", html_esc(p.get("title", "")))
             .replace("/*__AUTHOR__*/", html_esc(p.get("author") or "Author"))
@@ -383,16 +402,36 @@ def build_blog():
             .replace("/*__VERSION__*/", VERSION)
             .replace("/*__BUILT__*/", TODAY)
             .replace("<!--__BODY__-->", p["body"]))
-        open(os.path.join(blog_dir, slug + ".html"), "w", encoding="utf-8").write(page)
-    idx = (idx_tpl
+        open(os.path.join(sect_dir, slug + ".html"), "w", encoding="utf-8").write(page)
+    idx = apply_section_nav(idx_tpl
         .replace("/*__CSS__*/", css)
         .replace("/*__TAGLINE__*/", tagline)
         .replace("<!--__INTRO__-->", intro)
         .replace("<!--__POSTS__-->", "\n".join(cards))
         .replace("/*__VERSION__*/", VERSION)
         .replace("/*__BUILT__*/", TODAY))
-    open(os.path.join(blog_dir, "index.html"), "w", encoding="utf-8").write(idx)
+    open(os.path.join(sect_dir, "index.html"), "w", encoding="utf-8").write(idx)
     return posts
+
+def build_blog():
+    """Render blog pages according to BLOG_MODE. Source posts in blog/posts/ are never deleted."""
+    return build_posts_section(
+        "blog",
+        BLOG_MODE,
+        "Harmony Lodge No. 9, Cranston, Rhode Island.",
+        "Notes from the work at Harmony Lodge No. 9.",
+        sourced_tagline="Blog — posts by Ben Giumarra and Gregg Oberg, republished with permission.",
+        sourced_intro="These pieces were written by Ben Giumarra and Gregg Oberg and are republished here with permission. Each post names its author and links back to where it first appeared.",
+    )
+
+def build_pirates():
+    """Render Pirate Lodge Log pages according to PIRATES_MODE. Source posts in pirates/posts/ are never deleted."""
+    return build_posts_section(
+        "pirates",
+        PIRATES_MODE,
+        "The legend of pirates and Masons — the yarn, and the record.",
+        "The founding legend of a pirate lodge: where pirates and Freemasons actually cross, and where the stories run ahead of the evidence.",
+    )
 
 # ---------- lodges ----------
 lodges = rd("ri_lodges.csv")
@@ -812,9 +851,12 @@ checklist = dict(CHECKLIST)
 checklist["formImage"] = form_url_img
 checklist["formUrl"] = FORM_URL
 blog_posts = build_blog()
+pirates_posts = build_pirates()
 
 data = {"built": TODAY, "version": VERSION, "folder": FOLDER, "imagesFolder": IMAGES, "videosFolder": VIDEOS,
         "formUrl": FORM_URL, "blogMode": BLOG_MODE, "blogEnabled": BLOG_ENABLED, "blogCount": len(blog_posts),
+        "piratesMode": PIRATES_MODE, "piratesEnabled": PIRATES_ENABLED, "piratesCount": len(pirates_posts),
+        "piratesNavLabel": PIRATES_NAV_LABEL,
         "events": {"upcoming": up, "past": past, "other": other},
         "checklist": checklist,
         "flyers": flyers, "photos": photos, "videos": videos, "docs": docs,
@@ -826,7 +868,8 @@ data = {"built": TODAY, "version": VERSION, "folder": FOLDER, "imagesFolder": IM
                    "hostedImages": hosted_imgs, "hostedVideos": hosted_vids,
                    "hostedImageMB": round(img_bytes / 1048576, 2),
                    "hostedVideoMB": round(vid_bytes / 1048576, 2),
-                   "blog": len(blog_posts) if BLOG_ENABLED else 0}}
+                   "blog": len(blog_posts) if BLOG_ENABLED else 0,
+                   "pirates": len(pirates_posts) if PIRATES_ENABLED else 0}}
 os.makedirs(os.path.join(HERE, "data"), exist_ok=True)
 for k in ("events", "checklist", "flyers", "photos", "videos", "docs", "resources", "reading", "lodges", "counts"):
     json.dump(data[k], open(os.path.join(HERE, "data", k + ".json"), "w"), indent=1, ensure_ascii=False)
@@ -847,4 +890,7 @@ print(json.dumps({
     "blogMode": BLOG_MODE,
     "blogEnabled": BLOG_ENABLED,
     "blogPosts": [{"title": p.get("title"), "date": p.get("date"), "author": p.get("author"), "source": p.get("source")} for p in blog_posts],
+    "piratesMode": PIRATES_MODE,
+    "piratesEnabled": PIRATES_ENABLED,
+    "piratesPosts": [{"title": p.get("title"), "date": p.get("date"), "author": p.get("author")} for p in pirates_posts],
 }, indent=2, ensure_ascii=False))
