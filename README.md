@@ -3,11 +3,14 @@
 A static, single-page guide (no server, no accounts) built from the local Harmony #9 archive.
 Hosted on GitHub Pages: https://greggoberg39-rgb.github.io/harmony9-rookie-guide/
 
-**Current version: v2.2.0**
+**Current version: v2.2.1**
 
 The page includes the official RI Grand Lodge Master Mason Rookie Award checklist (with a personal tracker saved only in the browser), a calendar in both list and month-grid views, flyers/photos/videos hosted on the site so they work on an iPhone without downloading from Google Drive, resources, an RI lodge directory, a Blog section (currently one post about this project), a Pirate Lodge Log section (currently one post on the pirate-and-Mason founding legend), and a "suggest an improvement" email link.
 
 ## Changelog
+
+### v2.2.1 (2026-11-15)
+- Adds a Pirate Lodge Log post, “Should the Pirate Lodge Buy the Ming Hai? A 3-Year Cost Look” (byline Gregg Oberg & Grok), with the same “Gregg hasn't read or edited it yet” caveat, a sourced low/likely/high 3-year cost table, red flags, next steps, and listing photos (credited “Photos: listing”). The one-page PDF is hosted at `pirates/ming-hai-3yr-costs.pdf` and photos under `pirates/media/ming-hai/`. No other posts changed.
 
 ### v2.2.0 (2026-11-15)
 - Adds a separate **The Pirate Lodge Log** section at `/pirates/`, mirroring the Blog tab (same nav style, index cards, post template, and mobile-friendly layout). It has its own on/off switch, `PIRATES_MODE`, in `build.py` (`"live"`, `"coming_soon"`, or `"off"`), and source files in `pirates/posts/` are never deleted by the build.

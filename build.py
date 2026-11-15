@@ -15,7 +15,7 @@ import csv, json, re, sys, os, datetime, subprocess, hashlib, shutil
 ARCH = sys.argv[1] if len(sys.argv) > 1 else "/workspace/harmony-archive"
 HERE = os.path.dirname(os.path.abspath(__file__))
 TODAY = datetime.date.today().isoformat()
-VERSION = "2.2.0"
+VERSION = "2.2.1"
 FOLDER = "https://drive.google.com/drive/folders/1OwSPqYeJlTW7ZvceGOezPnjsX4wDboHd"
 IMAGES = "https://drive.google.com/drive/folders/19peixug8n3EthSHKtXh0Th1JSoQ_JEkT"
 VIDEOS = "https://drive.google.com/drive/folders/1uzXTYt5i8P-8o8M0AxtjK_5akMaAP0qE"
